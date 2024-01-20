@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Typography from "./common/Typography/Typography";
+import TextField from "./common/TextField/TextField";
+import Button from "./common/Button/Button";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div>
+        <center>
+          <Typography level={"h1"} children={"Central de Emergencias"} />
+        </center>
+      </div>
+      <div>
+        <label>Emergencia</label>
+        <TextField
+          label="Escribe una emergencia"
+          variant="outlined"
+        ></TextField>
+        <Button variant={"contained"} value={"Asignar"}></Button>
+      </div>
+      <center>
+        <Typography level={"h3"} children={"Emergencias sin asignar"} />
+      </center>
+      <div>
+        <center>
+          <Typography level={"h3"} children={"Emergencias Asignadas"} />
+        </center>
+      </div>
+    </>
   );
-}
+};
 
 export default App;
