@@ -1,25 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { AuthContextProvider } from "./contexts/AuthContext";
+import Titulo from "../src/components/Titulo/Titulo";
+import Ingreso from "../src/components/Ingreso/Ingreso";
+import SubTitulo from "../src/components/SubTitulo/SubTitulo";
 
-function App() {
+
+const App = () => {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <AuthContextProvider>
+      <div style = {{ textAlign: "center" }}>
+
+        <Titulo />
+        <Ingreso />
+        <SubTitulo />
+
+        <p><h1>Tabla 1 [Ingresar] [Eliminar]</h1></p>
+        <p><h1>Emergencias Asignadas (Tipografia)</h1></p>
+        <p><h1>Tabla 2 [Eliminar] [Reasignar]</h1></p>
+      </div>
+    </AuthContextProvider>
   );
-}
+
+};
 
 export default App;
+
