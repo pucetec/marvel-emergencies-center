@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { EmergencyProvider } from './EmergencyContext';
+import EmergencyInput from './EmergencyInput';
+import EmergencyList from './EmergencyList';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <EmergencyProvider>
+      <div className="App">
+        <h1>Central de Emergencias</h1>
+        <EmergencyInput />
+        <EmergencyList />
+        {}
+      </div>
+    </EmergencyProvider>
   );
 }
 
