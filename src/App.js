@@ -1,18 +1,22 @@
+import Button from "./common/Button/Button";
+import InputText from "./common/InputText/InputText";
+import Typography from "./common/Typography/Typography";
+
 function App() {
   return (
     <div>
       <div>
-        <h1>Central de Emergencias</h1>
+        <Typography level={"h1"}>Central de Emergencias</Typography>
       </div>
       <div>
         <label>Emergencia</label>
-        <input placeholder="emergencia"></input>
+        <InputText placeholder={"emergencia"} />
       </div>
       <div>
-        <button>Ingresar</button>
+        <Button value={"Ingresar"} />
       </div>
       <div>
-        <h2>Emergencias sin asignar</h2>
+        <Typography level={"h2"}>Emergencias sin asignar</Typography>
       </div>
       <div>
         <table>
@@ -24,7 +28,7 @@ function App() {
         </table>
       </div>
       <div>
-        <h2>Emergencias Asignadas</h2>
+        <Typography level={"h2"}>Emergencias Asignadas</Typography>
       </div>
       <div>
         <table>
