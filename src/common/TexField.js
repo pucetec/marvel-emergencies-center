@@ -1,7 +1,7 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 
-const TextField = ({ label, value, onChange }) => {
+const CustomTextField = ({ label, value, onChange }) => {
   return (
     <TextField
       label={label}
@@ -13,4 +13,4 @@ const TextField = ({ label, value, onChange }) => {
   );
 };
 
-export default TextField;
+export default CustomTextField;

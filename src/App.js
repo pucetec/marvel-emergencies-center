@@ -3,15 +3,18 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import "./App.css";
 import CustomButton from "./common/Button";
-import TextField from "./common/TextField";
+import CustomTextField from "./common/TexField";
+
 
 function App() {
   const handleIngresarClick = () => {
     console.log("Botón 'Ingresar' clicado");
   };
+
   const handleTextFieldChange = (event) => {
     console.log("Valor del TextField:", event.target.value);
   };
+
   return (
     <div className="App">
       <Box sx={{ width: "100%", maxWidth: 500 }}>
@@ -20,7 +23,7 @@ function App() {
         </Typography>
         <Typography variant="h5" gutterBottom>
           Emergencia
-          <TextField label="Emergencia" onChange={handleTextFieldChange} />
+          <CustomTextField label="Emergencia" onChange={handleTextFieldChange} />
           <CustomButton onClick={handleIngresarClick}>Ingresar</CustomButton>
         </Typography>
         <Typography variant="h5" gutterBottom>
