@@ -1,25 +1,40 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+
+import React, { useState } from 'react';
+
+import Form from './Components/Form/Form';
+import TableI from './Components/Table/Table';
+
+const App = () => {
+  const [incidents, setIncidents] = useState([]);
+
+  const handleAddIncident = (newIncident) => {
+    setIncidents([...incidents, newIncident]);
+  };
+
+  const handleDeleteIncident = (index) => {
+    const updatedIncidents = [...incidents];
+    updatedIncidents.splice(index, 1);
+    setIncidents(updatedIncidents);
+  };
+
+  const handleAssignHero = (index) => {
+
+    console.log(`Asignar héroe para la incidencia en el índice ${index}`);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Central de Emergencia</h1>
+      <Form onAddIncident={handleAddIncident} />
+      <TableI
+        incidents={incidents}
+        onDeleteIncident={handleDeleteIncident}
+        onAssignHero={handleAssignHero}
+      />
     </div>
   );
-}
+};
 
 export default App;
+
