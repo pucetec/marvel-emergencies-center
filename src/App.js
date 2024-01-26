@@ -25,6 +25,9 @@ function App() {
             <th>Emergencia</th>
             <th>Acciones</th>
           </tr>
+          <tr>
+            <td></td>
+          </tr>
         </table>
       </div>
       <div>
