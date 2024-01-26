@@ -1,0 +1,39 @@
+APIS DE MARVEL
+
+https://developer.marvel.com/
+
+
+
+conexion con Postman
+
+- usa APIkey
+- usa Hash (con encriptacion md5 de 128 bits https://www.md5.cz)
+
+
+md5(ts + private key + public key) uno al lado del otro, y se ingresa en md5 para que se codifique con hash de 128 bits.
+
+https://www.md5.cz/
+
+
+
+
+
+(137cff97f61536b194c0aded7e7ba8356a700601cf80cc63e02ba096acedccb74853b58181)
+
+
+*****************************************************************************************
+para usar con Postman:
+
+GET: https://gateway.marvel.com:443/v1/public/comics?apikey=80cc63e02ba096acedccb74853b58181&ts=13&hash=9943e11324234d730f84dd636faff7b4
+
+Key: Value
+apikey: 80cc63e02ba096acedccb74853b58181
+ts: 13
+hash: 9943e11324234d730f84dd636faff7b4
+*****************************************************************************************
+
+
+ts: time stamp (es un momento en la historia: 20240125163546)
+
+se obtiene el timestamp con Date.now() da los segundos desde 1970
+

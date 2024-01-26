@@ -1,0 +1,31 @@
+nuevas-librerias
+
+react-dotenv
+md5
+
+npm install react-dotenv md5
+
+
+
+------------------------------------
+
+
+
+
+crear un archivo .env en la raiz de la app
+
+Dentro de este archivo poner el public key y el private key de marvel
+
+-------------------------------
+
+
+AUMENTAR en el package.json
+
+"react-dotenv": {
+      "whitelist": [
+        "PUBLIC_KEY",
+        "PRIVATE_KEY"
+      ]
+    }
+
+    

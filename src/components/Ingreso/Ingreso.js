@@ -9,7 +9,7 @@ const Ingreso = () => {
 const { list, setEmergencia, addItems } = useContextoGeneral();
 
   return (
-    <div>
+    <div style = {{ textAlign: "center" }}>
       <p>
         <input onChange={ event => setEmergencia(event.target.value)} />
         <button onClick={ addItems }>Ingreso de emergencia</button>
@@ -17,7 +17,8 @@ const { list, setEmergencia, addItems } = useContextoGeneral();
       <SubTitulo />
       <p>
         <ol>
-          { list.map( (item, i) => ( <li key={ i }>{ item }</li> ) ) }
+          { list.map( (item, i) => ( <li key={ i }>{ item }</li> ) )
+           }
         </ol>
       </p>
     </div>
