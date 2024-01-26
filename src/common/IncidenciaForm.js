@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
+import NestedModal from "./Modal/Modal";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
@@ -148,6 +149,8 @@ function IncidenciaForm() {
                   >
                     Eliminar
                   </Button>
+                  <NestedModal />
+                  {/*
                   <Button
                     variant="outlined"
                     color="secondary"
@@ -156,6 +159,7 @@ function IncidenciaForm() {
                   >
                     Asignar
                   </Button>
+                  */}
                 </TableCell>
               </TableRow>
             ))}
