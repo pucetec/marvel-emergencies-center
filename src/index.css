@@ -5,9 +5,25 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  padding: 50px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.typography {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.button {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+.textField {
+  padding-left: 100px;
+  padding-right: 100px;
 }

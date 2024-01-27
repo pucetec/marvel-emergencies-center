@@ -1,21 +1,16 @@
-import Typography from "./common/Typography/Typography";
-import { TextField } from "./common/InputBox/InputBox";
-import Button from "./common/Button/Button";
-
-//const typographyStyle = { position: "absolute", top: "50%" };
+import { AssignedList } from "./components/AssignedList/AssignedList";
+import { Header } from "./components/Header/Header";
+import Modal from "./components/Modal/Modal";
+import { WithoutAssignList } from "./components/WithoutAssignList/WithoutAssignList";
 function App() {
   return (
     <>
-      <Typography
-        variant={"h3"}
-        align={"center"}
-        value={"Central de Emergencias"}
-      />
-      <div style={{ display: "flex" }}>
-        <Typography variant={"p"} value={"Emergencias"} />
-        <TextField label={""} variant={"filled"} />
-        <Button content={"test"} color={"primary"} variant={"contained"} />
-      </div>
+      <Header />
+      <hr />
+      <WithoutAssignList />
+      <hr />
+      <AssignedList />
+      <Modal />
     </>
   );
 }
