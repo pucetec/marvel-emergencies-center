@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
-import NestedModal from "./Modal/Modal";
+import BasicModal from "./Modal/Modal";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
@@ -78,7 +78,11 @@ function IncidenciaForm() {
       </div>
     );
   };
-
+  const valuemodal = (id) => {
+    const nuevaLista = incidenciasList.filter((item) => item.id !== id);
+    console.log(nuevaLista);
+    return nuevaLista;
+  };
   return (
     <Container maxWidth="md">
       <Typography variant="h4" gutterBottom>
@@ -149,7 +153,7 @@ function IncidenciaForm() {
                   >
                     Eliminar
                   </Button>
-                  <NestedModal />
+                  <BasicModal TextoMOD={item.incidencia} />
                   {/*
                   <Button
                     variant="outlined"
