@@ -1,12 +1,15 @@
 import React from "react";
+import { useEmergencyContext } from "../../context/EmergencyContext";
 
-const InputText = ({ placeholder, value, onChange }) => {
+const InputText = ({ placeholder }) => {
+  const { emergency, handleNewEmergency } = useEmergencyContext();
+  console.log(emergency);
   return (
     <div>
       <input
         placeholder={placeholder}
-        value={value}
-        onChange={onChange}
+        value={emergency}
+        onChange={handleNewEmergency}
       ></input>
     </div>
   );

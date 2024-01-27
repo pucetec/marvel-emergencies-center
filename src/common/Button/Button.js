@@ -1,9 +1,11 @@
 import React from "react";
+import { useEmergencyContext } from "../../context/EmergencyContext";
 
-const Button = ({ onClick, value }) => {
+const Button = ({ value }) => {
+  const { handleEmergencyAdded } = useEmergencyContext();
   return (
     <div>
-      <button onClick={onClick}>{value}</button>
+      <button onClick={handleEmergencyAdded}>{value}</button>
     </div>
   );
 };
