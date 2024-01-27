@@ -95,7 +95,7 @@ function IncidenciaForm() {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
                 <TableCell>
-                  <BasicModal/>
+                  <BasicModal TextoModal={item.incidencia}/>
                   <Button
                     variant="outlined"
                     color="secondary"

@@ -7,17 +7,22 @@ import axios from 'axios';
 
 
 function App() {
+  const GATEWAY = "http://gateway.marvel.com/v1/public/comics?apikey=";
   const bringMarvelInfo = async () => {
     const currentTimestamp = Date.now().toString();
-    const joinedKey = currentTimestamp + env.PRIVATE_KEY + env.PUBLIC_KEY ;
+    const joinedKey = currentTimestamp + env.PRIVATE_KEY + env.PUBLIC_KEY;
     const md5Key = md5(joinedKey);
 
     const response = await axios.get(
-      GATEWAY + env.PRIVATE_KEY + "&ts=" + currentTimestamp
-    )
-
-  }
-
+      GATEWAY + env.PUBLIC_KEY + "&ts=" + currentTimestamp + "&hash=" + md5Key,
+      {
+        headers: {
+          Accept: "*/*",
+        },
+      }
+    );
+    console.log({ response });
+  };
 
 
 
