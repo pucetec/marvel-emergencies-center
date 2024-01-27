@@ -5,7 +5,11 @@ import Box from "@mui/material/Box";
 const Modal = () => {
   const [open, setOpen] = useState(false);
 
-  return <CustomModal></CustomModal>;
+  return (
+    <CustomModal open={open} onClose={handleClose}>
+      <Box></Box>
+    </CustomModal>
+  );
 };
 
 export default Modal;

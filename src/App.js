@@ -1,8 +1,13 @@
 import Button from "./common/Button/Button";
 import InputText from "./common/InputText/InputText";
 import Typography from "./common/Typography/Typography";
+import AssignIcon from "./common/Icons/AssignIcon";
 
-function App() {
+const App = () => {
+  const handleOpen = () => (setOpen = true);
+  const { emergency, emergencyList, handleNewEmergency } =
+    useEmergencyContext();
+
   return (
     <div>
       <div>
@@ -10,7 +15,7 @@ function App() {
       </div>
       <div>
         <label>Emergencia</label>
-        <InputText placeholder={"emergencia"} />
+        <InputText value={emergency} placeholder={"emergencia"} />
       </div>
       <div>
         <Button value={"Ingresar"} />
@@ -25,9 +30,14 @@ function App() {
             <th>Emergencia</th>
             <th>Acciones</th>
           </tr>
-          <tr>
-            <td></td>
-          </tr>
+          {emergencyList.map((item, i) => {
+            let counter = 1;
+            <tr>
+              <td>{(item.counter = counter++)}</td>
+              <td>{item.emergency}</td>
+              <td></td>
+            </tr>;
+          })}
         </table>
       </div>
       <div>
@@ -45,6 +55,6 @@ function App() {
       </div>
     </div>
   );
-}
+};
 
 export default App;

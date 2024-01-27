@@ -2,10 +2,10 @@ import React from "react";
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 import IconButton from "@mui/material/IconButton";
 
-const AssignIcon = () => {
+const AssignIcon = (onClick) => {
   return (
     <>
-      <IconButton>
+      <IconButton onClick={onClick}>
         <CenterFocusStrongIcon />
       </IconButton>
     </>

@@ -15,8 +15,23 @@ const resonse = await axios.get(
   Gateway + env.PUBLIC_KEY + "&ts=" + currentTimeStamp + "&hash=" + md5Key
 );
 
+const [emergency, setEmergency] = useState("");
+const handleNewEmergency = (e) => {
+  setEmergency(e.target.value);
+};
+
+const handleEmergencyAdded = () => {};
+
+const [emergencyList, setEmergencyList] = useState([""]);
+
 const EmergencyContextProvider = ({ children }) => {
-  return <EmergencyContext.Provider>{children}</EmergencyContext.Provider>;
+  return (
+    <EmergencyContext.Provider
+      value={{ emergency, emergencyList, handleNewEmergency }}
+    >
+      {children}
+    </EmergencyContext.Provider>
+  );
 };
 
 export default EmergencyContext;
