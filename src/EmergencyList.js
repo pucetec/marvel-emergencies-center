@@ -1,35 +1,32 @@
 import React, { useContext } from 'react';
 import { EmergencyContext } from './EmergencyContext';
 
-function EmergencyList() {
-  const { emergencies, assignHeroToEmergency } = useContext(EmergencyContext);
+const EmergencyList = () => {
+  const { emergencies, assignHeroToEmergency, removeEmergency, openModal } = useContext(EmergencyContext);
 
   return (
-    <div>
-      {}
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Emergencia</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {emergencies.map((emergency, index) => (
-            <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{emergency.description}</td>
-              <td>
-                {}
-                <button onClick={() => assignHeroToEmergency(emergency.id, /* hero id */)}>Asignar Héroe</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <>
+      <h2>Emergencias sin asignar</h2>
+      <div>
+        {emergencies.filter(e => !e.heroId).map((emergency) => (
+          <div key={emergency.id}>
+            <span>{emergency.description}</span>
+            <button onClick={() => openModal(emergency.id)}>Asignar Héroe</button>
+            <button onClick={() => removeEmergency(emergency.id)}>Eliminar</button>
+          </div>
+        ))}
+      </div>
+      <h2>Emergencias Asignadas</h2>
+      <div>
+        {emergencies.filter(e => e.heroId).map((emergency) => (
+          <div key={emergency.id}>
+            <span>{emergency.description}</span>
+            <button onClick={() => openModal(emergency.id)}>Reasignar Héroe</button>
+          </div>
+        ))}
+      </div>
+    </>
   );
-}
+};
 
 export default EmergencyList;

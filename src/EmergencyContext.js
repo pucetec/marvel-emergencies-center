@@ -1,26 +1,48 @@
+// EmergencyContext.js
 import React, { createContext, useState } from 'react';
 
 export const EmergencyContext = createContext();
 
 export const EmergencyProvider = ({ children }) => {
   const [emergencies, setEmergencies] = useState([]);
-  const [heroes, setHeroes] = useState([]);
+  const [heroes, setHeroes] = useState([
+    { id: 1, name: 'Spiderman' },
+    { id: 2, name: 'Iron Man' },
+    // Añade más héroes aquí...
+  ]);
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedEmergencyId, setSelectedEmergencyId] = useState(null);
 
   const addEmergency = (description) => {
     const newEmergency = {
-      id: emergencies.length + 1, 
+      id: emergencies.length + 1,
       description,
-      hero: null
+      heroId: null
     };
-    setEmergencies([...emergencies, newEmergency]);
+    setEmergencies(prevEmergencies => [...prevEmergencies, newEmergency]);
   };
 
   const assignHeroToEmergency = (emergencyId, heroId) => {
-    setEmergencies(
-      emergencies.map((emergency) =>
-        emergency.id === emergencyId ? { ...emergency, hero: heroId } : emergency
+    setEmergencies(prevEmergencies =>
+      prevEmergencies.map(emergency =>
+        emergency.id === emergencyId ? { ...emergency, heroId: heroId } : emergency
       )
     );
+  };
+
+  const removeEmergency = (emergencyId) => {
+    setEmergencies(prevEmergencies =>
+      prevEmergencies.filter(emergency => emergency.id !== emergencyId)
+    );
+  };
+
+  const openModal = (emergencyId) => {
+    setSelectedEmergencyId(emergencyId);
+    setModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -28,7 +50,12 @@ export const EmergencyProvider = ({ children }) => {
       emergencies,
       heroes,
       addEmergency,
-      assignHeroToEmergency
+      assignHeroToEmergency,
+      removeEmergency,
+      isModalOpen,
+      selectedEmergencyId,
+      openModal,
+      closeModal
     }}>
       {children}
     </EmergencyContext.Provider>
