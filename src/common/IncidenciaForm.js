@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
+import BasicModal from "./Modal/Modal";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
@@ -148,14 +149,7 @@ function IncidenciaForm() {
                   >
                     Eliminar
                   </Button>
-                  <Button
-                    variant="outlined"
-                    color="secondary"
-                    onClick={() => SimplePopper()}
-                    id={"simple-popper"}
-                  >
-                    Asignar
-                  </Button>
+                 <BasicModal/>
                 </TableCell>
               </TableRow>
             ))}
