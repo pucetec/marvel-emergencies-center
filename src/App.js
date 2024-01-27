@@ -6,6 +6,7 @@ import env from "react-dotenv";
 import { Box, Button, Container, Grid, Modal, Typography } from "@mui/material";
 
 const GATEWAY = "http://gateway.marvel.com/v1/public/comics?apikey=";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -17,6 +18,9 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
+
+
 function App() {
   const bringMarvelInfo = async () => {
     const currentTimestamp = Date.now().toString();
