@@ -6,9 +6,7 @@ import "./App.css";
 import CustomButton from "./common/Button";
 import List from "./common/List"; // Importa el componente List
 import CustomTextField from "./common/TexField";
-import env from "react-dotenv";
-import md5 from "md5";
-import axios from "axios";
+import Icon from "./common/Icon"; //
 
 function App() {
   const handleIngresarClick = () => {
@@ -20,17 +18,37 @@ function App() {
     console.log("Valor del TextField:", event.target.value);
   };
 
-  // Define tus listas de elementos
   const emergenciasSinAsignar = [
-    { text: "Emergencia 1 sin asignar" },
-    { text: "Emergencia 2 sin asignar" },
-    { text: "Emergencia 3 sin asignar" },
+    {
+      text: "Emergencia 1 sin asignar",
+      buttonText: "Botón 1",
+      action: <Icon />,
+    },
+    {
+      text: "Emergencia 2 sin asignar",
+      buttonText: "Botón 2",
+      action: <Icon />,
+    },
+    {
+      text: "Emergencia 3 sin asignar",
+      buttonText: "Botón 3",
+      action: <Icon />,
+    },
   ];
 
   const emergenciasAsignadas = [
-    { text: "Emergencia 1 asignada" },
-    { text: "Emergencia 2 asignada" },
-    { text: "Emergencia 3 asignada" },
+    {
+      text: "Emergencia 1 asignada",
+      action: <CustomButton>sdffs</CustomButton>,
+    },
+    {
+      text: "Emergencia 2 asignada",
+      action: <CustomButton>sdffs</CustomButton>,
+    },
+    {
+      text: "Emergencia 3 asignada",
+      action: <CustomButton>sdffs</CustomButton>,
+    },
   ];
 
   return (
@@ -50,13 +68,11 @@ function App() {
         <Typography variant="h5" gutterBottom>
           Emergencias sin asignar
         </Typography>
-        {/* Agrega el componente List para Emergencias sin asignar */}
-        <List items={emergenciasSinAsignar} withButtons={true} />
+        <List items={emergenciasSinAsignar} componentType="button" />
         <Typography variant="h5" gutterBottom>
           Emergencias asignadas
         </Typography>
-        {/* Agrega el componente List para Emergencias asignadas */}
-        <List items={emergenciasAsignadas} withButtons={true} />
+        <List items={emergenciasAsignadas} componentType="icon" />
       </Box>
     </div>
   );

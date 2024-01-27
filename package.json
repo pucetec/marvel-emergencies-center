@@ -41,12 +41,12 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
-    ],
-    "react-dotenv": {
-      "whitelist": [
-        "PUBLIC_KEY",
-        "PRIVATE_KEY"
-      ]
-    }
+    ]
+  },
+  "react-dotenv": {
+    "whitelist": [
+      "PUBLIC_KEY",
+      "PRIVATE_KEY"
+    ]
   }
 }
