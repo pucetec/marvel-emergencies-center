@@ -1,38 +1,43 @@
-// App.js
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import "./App.css";
 import CustomButton from "./common/Button";
-import List from "./common/List"; // Importa el componente List
+import List from "./common/List";
 import CustomTextField from "./common/TexField";
-import Icon from "./common/Icon"; //
+import Icon from "./common/Icon"; 
+import CustomModal from "./common/Modal";
 
 function App() {
-  const handleIngresarClick = () => {
-    console.log("Botón 'Ingresar' clicado");
-  };
-  const currentTimestamnp = Date.now().toString();
-
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  
   const handleTextFieldChange = (event) => {
     console.log("Valor del TextField:", event.target.value);
+  };
+
+  const handleIconClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
   };
 
   const emergenciasSinAsignar = [
     {
       text: "Emergencia 1 sin asignar",
       buttonText: "Botón 1",
-      action: <Icon />,
+      action: <Icon onClick={handleIconClick} />,
     },
     {
       text: "Emergencia 2 sin asignar",
       buttonText: "Botón 2",
-      action: <Icon />,
+      action: <Icon onClick={handleIconClick} />,
     },
     {
       text: "Emergencia 3 sin asignar",
       buttonText: "Botón 3",
-      action: <Icon />,
+      action: <Icon onClick={handleIconClick} />,
     },
   ];
 
@@ -63,7 +68,7 @@ function App() {
             label="Emergencia"
             onChange={handleTextFieldChange}
           />
-          <CustomButton onClick={handleIngresarClick}>Ingresar</CustomButton>
+          <CustomButton>Ingresar</CustomButton>
         </Typography>
         <Typography variant="h5" gutterBottom>
           Emergencias sin asignar
@@ -73,6 +78,15 @@ function App() {
           Emergencias asignadas
         </Typography>
         <List items={emergenciasAsignadas} componentType="icon" />
+        <Icon onClick={handleIconClick} />
+        <CustomModal
+          title="Asigna tu super héroe"
+          listItems={emergenciasSinAsignar.map((item) => (
+            <CustomButton key={item.text}>{item.buttonText}</CustomButton>
+          ))}
+          open={isModalOpen}
+          onClose={handleModalClose}
+        />
       </Box>
     </div>
   );
