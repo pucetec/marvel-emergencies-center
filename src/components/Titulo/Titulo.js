@@ -3,7 +3,7 @@ import React from "react";
 
 const Titulo= ({ level, children }) => {
 
-    return <h1>CENTRAL DE EMERGENCIAS</h1>;
+    return <h2>CENTRAL DE EMERGENCIAS</h2>;
 };
 
 export default Titulo;

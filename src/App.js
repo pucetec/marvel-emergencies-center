@@ -2,18 +2,24 @@ import "./App.css";
 import { ProveedorDeContexto } from "./contexts/Contexto";
 import Titulo from "../src/components/Titulo/Titulo";
 import Ingreso from "../src/components/Ingreso/Ingreso";
-import SubTitulo2 from "./components/SubTitulo2/SubTitulo2";
+import Asignamiento from "./components/Asignamiento/Asignamiento";
 
 
 const App = () => {
 
+
   return (
     <ProveedorDeContexto>
-      <div style = {{ textAlign: "center" }}>
-        <Titulo />
-        <Ingreso />
-        <SubTitulo2 />
-        <p><h1>Tabla 2 [Eliminar] [Reasignar]</h1></p>
+      <div id="contenedor-general" style = {{ textAlign: "center" }}>
+        <div id="parte-superior" >
+          <Titulo />
+        </div>
+        <div id="ingresos">
+          <Ingreso />
+        </div>
+        <div id="asignaciones">
+          <Asignamiento />
+        </div>
       </div>
     </ProveedorDeContexto>
   );
