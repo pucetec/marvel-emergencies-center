@@ -9,7 +9,10 @@ export const ProveedorDeContexto = ({ children }) => {
   const [list, setList]                   = useState([]);
   const [listAsignadas, setListAsignadas] = useState([]);
 
-  const heroe = "SuperHéroe";
+  const [heroe, setHeroe]                 = useState("");
+
+  const listaHeroes = ["Iron Man", "Thor", "Hulk", "Spider-Man"];
+
 
   const addItems = () => {
     if (emergencia === "") {}
@@ -18,14 +21,16 @@ export const ProveedorDeContexto = ({ children }) => {
     }
   };
 
+
+
   const addItemsSeleccionados = (item) => { setListAsignadas( (prevList) => { return [...prevList, item] } ) };
 
   const regresanLosItems = (item) => { setList( (prevList) => { return [...prevList, item] } ) };
 
 
-  const borrarElementoIngresos = (item) => {
+  const borrarElementoIngresos = (i) => {
     const listaNueva = [...list];
-    listaNueva.splice(item, 1);
+    listaNueva.splice(i, 1);
     setList(listaNueva);
   };
 
@@ -36,7 +41,7 @@ export const ProveedorDeContexto = ({ children }) => {
   };
 
   return (
-    <Contexto.Provider value = {{ list, emergencia, setEmergencia, addItems, listAsignadas, addItemsSeleccionados, borrarElementoIngresos, borrarElementoAsignados, heroe, regresanLosItems }}>
+    <Contexto.Provider value = {{ list, emergencia, setEmergencia, addItems, listAsignadas, addItemsSeleccionados, borrarElementoIngresos, borrarElementoAsignados, heroe, setHeroe, listaHeroes, regresanLosItems }}>
       { children }
     </Contexto.Provider>
   );

@@ -1,7 +1,7 @@
 import "./App.css";
 import { ProveedorDeContexto } from "./contexts/Contexto";
 import Titulo from "../src/components/Titulo/Titulo";
-import Ingreso from "../src/components/Ingreso/Ingreso";
+import Ingreso from "./components/Ingreso/Ingreso";
 import Asignamiento from "./components/Asignamiento/Asignamiento";
 
 

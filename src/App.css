@@ -1,6 +1,27 @@
 body {
-  background: black;
-  color: grey;
+  background-color: rgb(32, 32, 32);
+  color: rgb(189, 187, 187);
+}
+
+input {
+  background-color: rgb(226, 212, 212);
+  width: 60%;
+  border-color: black;
+  border-radius: 8px;
+}
+
+#boton-ingresos {
+  margin: 0% 0% 0% 1%;
+  background-color: rgb(255, 213, 97);
+  border-color: black;
+  border-radius: 8px;
+}
+
+.boton-modal {
+  margin: 0% 0% 0% 1%;
+  background-color: aqua;
+  border-color: black;
+  border-radius: 8px;
 }
 
 .items-listas {

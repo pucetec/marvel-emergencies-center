@@ -7,7 +7,7 @@ const Asignamiento = () => {
   const { listAsignadas, borrarElementoAsignados, heroe, regresanLosItems } = useContextoGeneral();
 
   return (
-    <div style = {{ textAlign: "center", width: "70%", margin: "auto"  }}>
+    <div style = {{ textAlign: "center", width: "55%", margin: "auto"  }}>
       <SubTitulo2 />
       <p>
         <ol>
@@ -23,7 +23,7 @@ const Asignamiento = () => {
                   </div>
                 </div>
                 <div className="botones">
-                <button onClick={ () => { borrarElementoAsignados(item) } }>Borrar</button>
+                <button onClick={ () => { borrarElementoAsignados(i) } }>Borrar</button>
                 <button onClick={ () => { regresanLosItems(item); borrarElementoAsignados(i) } }>Reasignar</button>
                 </div>
             </div>
