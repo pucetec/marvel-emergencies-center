@@ -11,7 +11,12 @@ export const ProveedorDeContexto = ({ children }) => {
 
   const heroe = "SuperHéroe";
 
-  const addItems = () => { setList( (prevList) => { return [...prevList, emergencia] } ); setEmergencia(""); };
+  const addItems = () => {
+    if (emergencia === "") {}
+    else {
+      setList( (prevList) => { return [...prevList, emergencia] } ); setEmergencia("");
+    }
+  };
 
   const addItemsSeleccionados = (item) => { setListAsignadas( (prevList) => { return [...prevList, item] } ) };
 
