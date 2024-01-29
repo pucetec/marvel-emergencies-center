@@ -1,9 +1,12 @@
 import Typography from "../../common/Typography/Typography";
+import AssignedGrid from "../Grid/AssignedGrid";
 
 export const AssignedList = () => {
   const styles = {
-    paddingLeft: "105px",
-    paddingRight: "105px",
+    paddingLeft: "115px",
+    paddingRight: "100px",
+    paddingTop: "1%",
+    paddingBottom: "1%",
   };
   return (
     <>
@@ -45,6 +48,7 @@ export const AssignedList = () => {
           style={styles}
         />
       </div>
+      <AssignedGrid />
     </>
   );
 };

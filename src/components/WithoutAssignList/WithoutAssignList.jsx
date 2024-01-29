@@ -1,31 +1,15 @@
-import { useState } from "react";
 import Typography from "../../common/Typography/Typography";
-import Grid from "../../common/Grid/AssignGrid";
-import DeleteIcon from "@mui/icons-material/Delete";
-import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
-
-const firstHeroesList = [
-  {
-    id: 1,
-    name: "Test",
-    etc: <CenterFocusStrongIcon fontSize="large" />,
-    etc2: <DeleteIcon fontSize="large" />,
-  },
-  {
-    id: 2,
-    name: "Test2",
-    etc: <CenterFocusStrongIcon fontSize="large" />,
-    etc2: <DeleteIcon fontSize="large" />,
-  },
-];
-const headerList = [{ label: "#" }];
+import EmergencyGrid from "../Grid/AssignGrid";
+import { useMarvelAPI } from "../../contexts/HeroContext";
 
 export const WithoutAssignList = () => {
-  const [heroesList, setHeroesList] = useState([]);
+  const { emergencyList } = useMarvelAPI();
 
   const styles = {
     paddingLeft: "105px",
     paddingRight: "105px",
+    paddingTop: "1%",
+    paddingBottom: "1%",
   };
   return (
     <>
@@ -61,7 +45,7 @@ export const WithoutAssignList = () => {
           style={styles}
         />
       </div>
-      <Grid items={firstHeroesList} xs={3} md={3} xl={3} />
+      <EmergencyGrid items={emergencyList} xs={3} md={3} xl={3} />
     </>
   );
 };
