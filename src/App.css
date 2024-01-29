@@ -9,3 +9,11 @@ body {
   justify-content: space-between;
   margin-bottom: 5px;
 }
+
+.texto-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 75%;
+}
