@@ -12,11 +12,14 @@ import {
   TableRow,
   TableCell,
 } from "@mui/material";
+import { Delete as DeleteIcon, AddCircle as AddCircleIcon } from '@mui/icons-material';
+import SimpleModal from "./SimpleModal";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
   const [incidenciasList, setIncidenciasList] = useState([]);
   const [contador, setContador] = useState(1);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const handleIncidenciaChange = (event) => {
     setIncidencia(event.target.value);
@@ -42,10 +45,18 @@ function IncidenciaForm() {
     }
   };
 
+  const handleAddCircleClick = () => {
+    setModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <Container maxWidth="md">
       <Typography variant="h4" gutterBottom>
-        CENTRAL DE EMERGENCIAS
+        <h1>CENTRAL DE EMERGENCIAS</h1>
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={4}>
@@ -58,16 +69,17 @@ function IncidenciaForm() {
           />
         </Grid>
         <Grid item xs={2}>
+          {/* Botón Asignar */}
           <Button
             onClick={handleAsignarClick}
             variant="contained"
             color="primary"
           >
-            Asignar
+            INGRESAR
           </Button>
         </Grid>
       </Grid>
-      <h1>EMERGENCIAS SIN ASIGNAR</h1>
+      <h4>EMERGENCIAS SIN ASIGNAR</h4>
       <TableContainer style={{ marginTop: "20px" }}>
         <Table>
           <TableHead>
@@ -81,15 +93,59 @@ function IncidenciaForm() {
             {incidenciasList.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
-                {/* Agrega "Holaaa mundo" en la celda de "Emergencias" */}
-                <TableCell>Rodo en Fake Stret 1234</TableCell>  
-            </TableRow>
-            
+                <TableCell>{item.incidencia}</TableCell>
+                <TableCell>
+                  {/* Ícono Asignar en la fila de acciones */}
+                  <AddCircleIcon onClick={handleAddCircleClick}
+                    style={{ cursor: "pointer", marginRight: "5px" }}>
+                    
+                    
+                  </AddCircleIcon>
+                  {/* Ícono Eliminar en la fila de acciones */}
+                  <DeleteIcon
+                    onClick={() => handleEliminarClick(item.id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                </TableCell>
+              </TableRow>
             ))}
           </TableBody>
-          
         </Table>
       </TableContainer>
+      <h4>EMERGENCIAS ASIGNADAS</h4>
+      <SimpleModal modal = {modalOpen} close = {handleCloseModal}></SimpleModal> 
+      <TableContainer style={{ marginTop: "20px" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell>Emergencias</TableCell>
+              <TableCell>Acciones</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {incidenciasList.map((item) => (
+              <TableRow key={item.id}>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>{item.incidencia}</TableCell>
+                <TableCell>
+                  {/* Ícono Eliminar en la fila de acciones */}
+                  <DeleteIcon
+                    onClick={() => handleEliminarClick(item.id)}
+                    style={{ cursor: "pointer" }}
+                  />
+                  {/* Ícono Asignar en la fila de acciones */}
+                  <AddCircleIcon
+                    onClick={handleAddCircleClick}
+                    style={{ cursor: "pointer", marginRight: "5px" }}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <SimpleModal open={modalOpen} onClose={handleCloseModal} />
     </Container>
   );
 }
