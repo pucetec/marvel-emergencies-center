@@ -13,6 +13,7 @@ const App = () => {
       <div id="contenedor-general" style = {{ textAlign: "center" }}>
         <div id="parte-superior" >
           <Titulo />
+          <label> <small> Después de ingresar la emergencia, click en [ 1 Héroe ] , y luego click en [ 2 Asignar ] </small> </label>
         </div>
         <div id="ingresos">
           <Ingreso />
