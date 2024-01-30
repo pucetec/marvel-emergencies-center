@@ -28,13 +28,13 @@ const Asignamiento = () => {
               { listAsignadas.map( (item, i) => (
                 <tr key={ i }>
                   <td>
-                    { i + 1 }
+                    <small> { i + 1 } </small>
                   </td>
                   <td>
-                    { item }
+                    <small> { item } </small>
                   </td>
                   <td>
-                    { listAsignadasHeroe[ i ] }
+                    <small> { listAsignadasHeroe[ i ] } </small>
                   </td>
                   <td>
                     <button className="boton-borrar" onClick={ () => { borrarElementoAsignados(i) } }> Borrar </button>

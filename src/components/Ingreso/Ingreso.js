@@ -29,13 +29,13 @@ const Ingreso = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={{ padding: '20px', color: "white", backgroundColor: '#405099', width: '300px', margin: 'auto',
-         marginTop: '100px', borderRadius: '8px' }}>
+        <div style={{ padding: '20px', color: 'rgb(200, 250, 180)', backgroundColor: 'rgba(70, 100, 130, 0.9)', width: '315px',
+         margin: 'auto', marginTop: '100px', borderRadius: '8px', borderColor: 'rgba(45, 45, 75, 0.4)', borderStyle:'solid' }}>
           <h2 id="modal-modal-title">LISTA DE SUPERHÉROES</h2>
           <p id="modal-modal-description">
-            ............................................................................<br />
+            ...............................................................................<br />
             Elección reciente : {heroe}
-            <br />............................................................................
+            <br />...............................................................................
             <ol>
               { listaHeroes.map( (item, i) => (
                 <li key={ i }>
@@ -73,10 +73,10 @@ const Ingreso = () => {
               { list.map( (item, i) => (
                 <tr key={ i }>
                   <td>
-                    { i + 1 }
+                    <small> { i + 1 } </small>
                   </td>
                   <td>
-                    { item }
+                    <small> { item } </small>
                   </td>
                   <td>
                     

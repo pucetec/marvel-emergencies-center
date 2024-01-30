@@ -11,7 +11,8 @@ export const ProveedorDeContexto = ({ children }) => {
   const [listAsignadasHeroe, setListAsignadasHeroe] = useState([]);
   const [heroe,              setHeroe]              = useState("");
 
-  const listaHeroes = ["Iron Man", "Thor", "Hulk", "Spider-Man"];
+  const listaHeroes = ["Iron Man", "Thor", "Hulk", "Spider-Man", "Capitán América",
+   "Doctor Strange", "Ant-Man", "Wolverine"];
 
   const [modal, setModal] = useState(false);
 
