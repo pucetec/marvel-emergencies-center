@@ -1,27 +1,48 @@
 body {
-  background-color: rgb(32, 32, 32);
-  color: rgb(189, 187, 187);
+  background-image: url("https://t3.ftcdn.net/jpg/05/80/41/38/360_F_580413805_b88GBVkJGJ4rVcUg8N15hNx59DRlhwm0.jpg");
+  background-size: cover; 
+  color: rgb(213, 255, 245);
+}
+
+h2 {
+  color: aquamarine;
+  margin: 3%;
+}
+
+h3 {
+  color:rgb(83, 204, 204);
+}
+
+#contenedor-general {
+  width: 80%;
+  height: 80vh;
+  margin: 5% auto auto auto;
+  background-color: rgba(10, 10, 10, 0.9);
+  border-radius: 25px;
+  border-color: rgb(0, 0, 0);
+  border-style: solid;
 }
 
 input {
-  background-color: rgb(226, 212, 212);
-  width: 60%;
+  background-color: rgb(212, 207, 142);
+  width: 50%;
   border-color: black;
   border-radius: 8px;
+  margin: 0% 0% 0% 3%;
 }
 
 #boton-ingresos {
-  margin: 0% 0% 0% 1%;
+  margin: 0% 0% 0% 5%;
   background-color: rgb(255, 213, 97);
   border-color: black;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .boton-modal {
   margin: 0% 0% 0% 1%;
-  background-color: aqua;
+  background-color: rgb(0, 204, 255);
   border-color: black;
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .items-listas {
@@ -37,4 +58,52 @@ input {
   justify-content: space-between;
   margin-bottom: 5px;
   width: 75%;
+}
+
+.boton-asignar {
+  border-radius: 3px;
+  margin-right: 5px;
+  background-color: rgb(0, 204, 255);
+  border-color: black;
+
+}
+
+.boton-borrar {
+  border-radius: 3px;
+  margin-right: 5px;
+  background-color: rgb(241, 150, 75);
+  border-color: black;
+}
+
+.boton-reasignar {
+  border-radius: 3px;
+  background-color: rgb(95, 216, 84);
+  border-color: black;
+}
+
+.contenedor-tabla {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+  margin: 0% 0% 0% 6%;
+}
+
+th:nth-child(1), td:nth-child(1) {
+  width: 5%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+  width: 50%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+  width: 17%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+  width: 30%;
 }

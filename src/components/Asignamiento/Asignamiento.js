@@ -7,30 +7,41 @@ const Asignamiento = () => {
   const { listAsignadas, borrarElementoAsignados, heroe, regresanLosItems } = useContextoGeneral();
 
   return (
-    <div style = {{ textAlign: "center", width: "55%", margin: "auto"  }}>
+    <div style = {{ textAlign: "center", width: "80%", margin: "auto"  }}>
       <SubTitulo2 />
-      <p>
-        <ol>
-          { listAsignadas.map( (item, i) => (
-          <li key={ i }>
-            <div className="items-listas">
-                <div className="texto-item">
-                  <div className="texto-como-tal">
-                    { item }
-                  </div>
-                  <div className="superHeroes">
-                    { heroe }
-                  </div>
-                </div>
-                <div className="botones">
-                <button onClick={ () => { borrarElementoAsignados(i) } }>Borrar</button>
-                <button onClick={ () => { regresanLosItems(item); borrarElementoAsignados(i) } }>Reasignar</button>
-                </div>
-            </div>
-            </li>
-          ) ) }
-        </ol>
-      </p>
+
+      <div className="contenedor-tabla">
+        <table>
+          <thead>
+            <tr>
+            <th>#</th>
+            <th>EMERGENCIA</th>
+            <th>HÉROE</th>
+            <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            { listAsignadas.map( (item, i) => (
+              <tr key={ i }>
+                <td>
+                  { i + 1 }
+                </td>
+                <td>
+                  { item }
+                </td>
+                <td>
+                  { heroe }
+                </td>
+                <td>
+                  <button className="boton-borrar" onClick={ () => { borrarElementoAsignados(i) } }>Borrar</button>
+                  <button className="boton-reasignar" onClick={ () => { regresanLosItems(item); borrarElementoAsignados(i) } }>Reasignar</button>
+                </td>
+              </tr>
+            ) ) }
+          </tbody>
+        </table>
+      </div>
+
     </div>
   );
 };

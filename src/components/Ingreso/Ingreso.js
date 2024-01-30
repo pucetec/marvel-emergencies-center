@@ -23,7 +23,7 @@ const Ingreso = () => {
   borrarElementoIngresos} = useContextoGeneral();
 
   return (
-    <div style = {{ textAlign: "center", width: "55%", margin: "auto" }}>
+    <div style = {{ textAlign: "center", width: "80%", margin: "auto" }}>
       <p>
         <input value={emergencia} onChange={ event => setEmergencia(event.target.value)} />
         <button id="boton-ingresos" onClick={ () => { setHeroe(""); addItems(); } }>Ingresar emergencia</button>
@@ -37,7 +37,7 @@ const Ingreso = () => {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <div style={{ padding: '20px', color: "black", backgroundColor: 'grey', width: '300px', margin: 'auto',
+        <div style={{ padding: '20px', color: "white", backgroundColor: '#405099', width: '300px', margin: 'auto',
         marginTop: '100px', borderRadius: '8px' }}>
           <h2 id="modal-modal-title">LISTA DE SUPERHÉROES</h2>
           <p id="modal-modal-description">
@@ -52,7 +52,7 @@ const Ingreso = () => {
                       { item }
                     </div>
                     <div className="botones">
-                      <button onClick={ () => { setHeroe(item); } }>Seleccionar</button>
+                      <button className="boton-reasignar" onClick={ () => { setHeroe(item); } }>Seleccionar</button>
                     </div>
                   </div>
                 </li>
@@ -67,24 +67,39 @@ const Ingreso = () => {
       <SubTitulo />
 
 
-      <p>
-        <ol>
-          { list.map( (item, i) => (
-          <li key={ i }>
-            <div className="items-listas">
-              <div className="texto-item">
-                { item }
-              </div>
-              <div className="botones">
-                <button onClick={ () => { setHeroe(""); addItemsSeleccionados(item); borrarElementoIngresos(i);
-                abirModal(); } }>Asignar</button>
-                <button onClick={ () => { borrarElementoIngresos(i) } }>Borrar</button>
-              </div>
-            </div>
-            </li>
-          ) ) }
-        </ol>
-      </p>
+      <div className="contenedor-tabla">
+        <table>
+          <thead>
+            <tr>
+            <th>#</th>
+            <th>EMERGENCIA</th>
+            <th> </th>
+            <th>ACCIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            { list.map( (item, i) => (
+              <tr key={ i }>
+                <td>
+                  { i + 1 }
+                </td>
+                <td>
+                  { item }
+                </td>
+                <td>
+                  
+                </td>
+                <td>
+                  <button className="boton-asignar" onClick={ () => { setHeroe(""); addItemsSeleccionados(item);
+                  borrarElementoIngresos(i); abirModal(); } }>Asignar</button>
+                  <button className="boton-borrar" onClick={ () => { borrarElementoIngresos(i) } }>Borrar</button>
+                </td>
+              </tr>
+            ) ) }
+          </tbody>
+        </table>
+      </div>
+    
     </div>
   );
 };
