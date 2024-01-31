@@ -7,19 +7,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
-import Modal from '../Modal/Modal';
+import ModalMarvel from "../Modal/ModalMarvel";
+import { useEmergency } from "../../context/EmergencyContext/EmergencyContext";
 
-function createData(numeros,Emergencia,Acciones) {
-    return { numeros,Emergencia,Acciones };
-}
-
-const filas = [
-    createData(1 ,"Robo en Fake street 1234"),
-    createData(2,"Secuestro en Edificio Empire States"),
-    
-];
 
 const Tabla = () => {
+    const {unassignedEmergency} = useEmergency();
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -35,17 +28,17 @@ const Tabla = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {filas.map((fila) => (
+                    {unassignedEmergency.map((fila) => (
                         <TableRow
-                            key={fila.numeros}
+                            key={fila.number}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                {fila.numeros}
+                                {fila.number}
                             </TableCell>
-                            <TableCell align="right">{fila.Emergencia}</TableCell>
+                            <TableCell align="right">{fila.description}</TableCell>
                             <TableCell align="right"><AddIcon onClick={handleOpen}/></TableCell>
-                            <Modal open={open}handleClose={handleClose}/>
+                            <ModalMarvel open={open}handleClose={handleClose}/>
                             
                         </TableRow>
                     ))}

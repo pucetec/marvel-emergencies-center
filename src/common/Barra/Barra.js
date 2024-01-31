@@ -1,9 +1,9 @@
 import React from "react";
 import TextField from '@mui/material/TextField';
 
-const Barra = ({label}) => {
+const Barra = ({label,onChange}) => {
     return (
-        <TextField label={label} variant="outlined" />
+        <TextField label={label} onChange={onChange} variant="outlined" />
     )
 }
 
