@@ -3,8 +3,6 @@ import {
   Container,
   Typography,
   TextField,
-  Select,
-  MenuItem,
   Grid,
   Button,
   Table,
@@ -13,28 +11,52 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
 } from "@mui/material";
 import ButtonAsign from "./ButtonAsign";
+import ButtonAsignH from "./ButtonAsignH";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
-  const [policia] = useState("");
   const [incidenciasList, setIncidenciasList] = useState([]);
   const [contador, setContador] = useState(1);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [marvelData, setMarvelData] = useState(null);
 
   const handleIncidenciaChange = (event) => {
     setIncidencia(event.target.value);
   };
 
+  const handleAsignarHeroeClick = async () => {
+    try {
+      const response = await fetch(
+        `https://gateway.marvel.com:443/v1/public/characters?apikey=f39b8cbf694e51e2ae6d129d7a97c448`
+      );
+      const data = await response.json();
+      console.log(data); // Imprimir la respuesta en la consola
+      setMarvelData(data);
+      setOpenDialog(true);
+    } catch (error) {
+      console.error("Error al obtener datos de Marvel:", error);
+    }
+  };
+
+  const handleDialogClose = () => {
+    setOpenDialog(false);
+  };
+
   const handleAsignarClick = () => {
-    if (incidencia !== "" && policia !== "") {
+    if (incidencia !== "") {
       const nuevaIncidencia = {
         id: contador,
         incidencia,
       };
       setIncidenciasList([...incidenciasList, nuevaIncidencia]);
       setContador(contador + 1);
-      setIncidencia(""); // Limpiar el campo después de agregar la incidencia
+      setIncidencia("");
     }
   };
 
@@ -55,14 +77,20 @@ function IncidenciaForm() {
         <Grid item xs={4}>
           <Typography variant="subtitle1">Emergencia:</Typography>
           <TextField
-            label="Ingrese la incidencia"
+            label="Ingrese la emergencia"
             value={incidencia}
             onChange={handleIncidenciaChange}
             fullWidth
           />
         </Grid>
         <Grid item xs={2}>
-          <ButtonAsign />
+          <ButtonAsign
+            onClick={handleAsignarClick}
+            variant="contained"
+            color="secondary"
+          >
+            Asignar
+          </ButtonAsign>
         </Grid>
       </Grid>
       <Typography variant="h6" gutterBottom>
@@ -87,15 +115,54 @@ function IncidenciaForm() {
                     onClick={() => handleEliminarClick(item.id)}
                     variant="contained"
                     color="secondary"
+                    style={{ marginRight: "8px", width: "100%" }}
                   >
                     Eliminar
                   </Button>
+                  <ButtonAsignH
+                    onClick={handleAsignarHeroeClick}
+                    variant="contained"
+                    color="secondary"
+                    style={{ width: "100%" }}
+                  >
+                    AsignarH
+                  </ButtonAsignH>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+
+      {/* Dialog para mostrar cuando se presiona AsignarH */}
+      <Dialog open={openDialog} onClose={handleDialogClose}>
+        <DialogTitle>Personajes de Marvel</DialogTitle>
+        <DialogContent>
+          {marvelData && marvelData.data && marvelData.data.results ? (
+            marvelData.data.results.map((character) => (
+              <div key={character.id}>
+                <img
+                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+                  alt={character.name}
+                  style={{ width: 50, height: 50, marginRight: 10 }}
+                />
+                {character.name}
+              </div>
+            ))
+          ) : (
+            <Typography>
+              {marvelData
+                ? "No se encontraron personajes."
+                : "Cargando datos..."}
+            </Typography>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleDialogClose} color="primary">
+            Cerrar
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
