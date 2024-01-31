@@ -1,5 +1,3 @@
-// app.js
-
 import { useState } from "react";
 import Table from "./common/Table";
 import axios from "axios";
@@ -36,7 +34,7 @@ const style = {
 function App() {
   const [emergencyInput, setEmergencyInput] = useState("");
   const [emergenciesSinAsignar, setEmergenciesSinAsignar] = useState([
-    "Robo en Fake street 1234", // Tu incidencia preexistente
+    "Robo en Fake street 1234", //Incidencia preexistente
   ]);
   const [emergenciesAsignadas, setEmergenciesAsignadas] = useState([]);
   const [open, setOpen] = useState(false);
@@ -158,13 +156,17 @@ function App() {
           Central de Emergencias
         </Typography>
         <Box style={{ display: "flex", alignItems: "center" }}>
-          <Typography variant="h5" style={{ marginRight: "16px" }}>
-            Emergencias
+          <Typography
+            variant="h5"
+            style={{ marginRight: "20px", marginTop: 50 }}
+          >
+            Emergencia
           </Typography>
           <TextField
             label="Nueva Emergencia"
             variant="outlined"
             fullWidth
+            style={{ marginTop: 50 }}
             value={emergencyInput}
             onChange={handleEmergencyInputChange}
           />
@@ -172,13 +174,18 @@ function App() {
             variant="contained"
             color="primary"
             onClick={handleIngresar}
-            style={{ marginLeft: 8 }}
+            style={{ marginLeft: 30, marginTop: 50 }}
           >
             Ingresar
           </Button>
         </Box>
         <Box>
-          <Typography variant="h4">Emergencias sin asignar</Typography>
+          <Typography
+            variant="h6"
+            style={{ marginLeft: 170, fontWeight: "bold", marginTop: 80 }}
+          >
+            Emergencias sin asignar
+          </Typography>
           <Table
             headers={["#", "Emergencia", "Acciones"]}
             bodyRows={emergenciesSinAsignar.map((emergency, index) => [
@@ -192,9 +199,14 @@ function App() {
           />
         </Box>
         <Box>
-          <Typography variant="h4">Emergencias asignadas</Typography>
+          <Typography
+            variant="h6"
+            style={{ marginLeft: 170, fontWeight: "bold", marginTop: 80 }}
+          >
+            Emergencias asignadas
+          </Typography>
           <Table
-            headers={["#", "Nombre", "Emergencia", "Acciones"]}
+            headers={["#", "Héroe", "Emergencia", "Acciones"]}
             bodyRows={emergenciesAsignadas.map((assignedEmergency, index) => [
               index + 1,
               assignedEmergency.hero,
@@ -217,8 +229,14 @@ function App() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <Typography id="modal-modal-title" variant="h6" component="h2">
-              Selecciona a quién asignar la emergencia
+            <Typography
+              id="modal-modal-title"
+              variant="h6"
+              align="center"
+              component="h2"
+              style={{ fontWeight: "bold" }}
+            >
+              Asigna tu súper héroe
             </Typography>
             <FormControl component="fieldset">
               <FormLabel component="legend">Héroe</FormLabel>
@@ -237,6 +255,21 @@ function App() {
                   value="Ironman"
                   control={<Radio />}
                   label="Ironman"
+                />
+                <FormControlLabel
+                  value="Thor"
+                  control={<Radio />}
+                  label="Thor"
+                />
+                <FormControlLabel
+                  value="Ant Man"
+                  control={<Radio />}
+                  label="Ant Man"
+                />
+                <FormControlLabel
+                  value="Hulk"
+                  control={<Radio />}
+                  label="Hulk"
                 />
               </RadioGroup>
             </FormControl>

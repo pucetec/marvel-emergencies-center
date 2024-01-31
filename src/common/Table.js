@@ -1,4 +1,3 @@
-// common/Table.js
 
 import React from "react";
 import {
