@@ -1,5 +1,5 @@
+import React, { useState } from "react"; // Importar useState
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import Box from "@mui/material/Box";
 import "./App.css";
 import CustomButton from "./common/Button";
@@ -7,9 +7,12 @@ import List from "./common/List";
 import CustomTextField from "./common/TexField";
 import Icon from "./common/Icon"; 
 import CustomModal from "./common/Modal";
+import MarvelComponent from "./common/MarvelComponent";
+import Table from "./common/Table";
+
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Corregir el uso de useState
   
   const handleTextFieldChange = (event) => {
     console.log("Valor del TextField:", event.target.value);
@@ -44,15 +47,15 @@ function App() {
   const emergenciasAsignadas = [
     {
       text: "Emergencia 1 asignada",
-      action: <CustomButton>sdffs</CustomButton>,
+      action: <Icon onClick={handleIconClick} />,
     },
     {
       text: "Emergencia 2 asignada",
-      action: <CustomButton>sdffs</CustomButton>,
+      action: <Icon onClick={handleIconClick} />,
     },
     {
       text: "Emergencia 3 asignada",
-      action: <CustomButton>sdffs</CustomButton>,
+      action: <Icon onClick={handleIconClick} />,
     },
   ];
 
@@ -78,7 +81,7 @@ function App() {
           Emergencias asignadas
         </Typography>
         <List items={emergenciasAsignadas} componentType="icon" />
-        <Icon onClick={handleIconClick} />
+        
         <CustomModal
           title="Asigna tu super héroe"
           listItems={emergenciasSinAsignar.map((item) => (
@@ -86,7 +89,9 @@ function App() {
           ))}
           open={isModalOpen}
           onClose={handleModalClose}
-        />
+        >
+          <MarvelComponent /> 
+        </CustomModal>
       </Box>
     </div>
   );
