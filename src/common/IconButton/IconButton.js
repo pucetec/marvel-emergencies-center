@@ -1,15 +1,8 @@
 import React from "react";
-import FavoriteIcon from "@mui/icons-material/Favorite";
-import { IconButton } from "@mui/material/";
-import { Stack } from "@mui/material/";
+import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 
-const IconButtons = ({ direction }) => {
-  return (
-    <Stack direction={direction} spacing={1}>
-      <IconButton aria-label="favorite" color="secondary">
-        <FavoriteIcon />
-      </IconButton>
-    </Stack>
-  );
+const IconButtons = ({ onClick }) => {
+  return <CenterFocusStrongIcon onClick={onClick} />;
 };
+
 export default IconButtons;
