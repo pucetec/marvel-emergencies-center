@@ -5,6 +5,7 @@ import env from "react-dotenv";
 import md5 from "md5";
 import axios from "axios";
 
+
 const GATEWAY = "http://gateway.marvel.com/v1/public/comics?apikey=";
 function App() {
   const bringMarvelInfo = async () => {
@@ -27,6 +28,8 @@ function App() {
   return (
     <div className="App">
       <IncidenciaForm />
+     
+      
     </div>
   );
 }

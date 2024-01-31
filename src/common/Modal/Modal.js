@@ -4,6 +4,7 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -32,10 +33,14 @@ export default function BasicModal({ TextoMOD }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            {TextoMOD}
+            {" Escoga un heroe para su emergencia: "+TextoMOD }  
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
+          
+          {" heroe escogido "+"para su emergencia: "+ TextoMOD }  
+                 
         </Box>
+       
       </Modal>
     </div>
   );
