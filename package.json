@@ -37,5 +37,11 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "react-dontenv":{ 
+    "whitelist":[
+      "PUBLIC_KEY",
+      "PRIVATE_KEY"
+    ]
   }
 }
