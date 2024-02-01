@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,12 +9,17 @@ import Paper from '@mui/material/Paper';
 import AddIcon from '@mui/icons-material/Add';
 import ModalMarvel from "../Modal/ModalMarvel";
 import { useEmergency } from "../../context/EmergencyContext/EmergencyContext";
+import DeleteIcon from '@mui/icons-material/Delete';
+
 
 
 const Tabla = () => {
-    const {unassignedEmergency} = useEmergency();
-    const [open, setOpen] = React.useState(false);
-    const handleOpen = () => setOpen(true);
+    const {unassignedEmergency, setEmergencySelected, deleteEmergency} = useEmergency();
+    const [open, setOpen] = useState(false);
+    const handleOpen = (emergency) => {
+        setOpen(true)
+        setEmergencySelected(emergency)
+    };
     const handleClose = () => setOpen(false);
     return (
         <TableContainer component={Paper}>
@@ -37,7 +42,8 @@ const Tabla = () => {
                                 {fila.number}
                             </TableCell>
                             <TableCell align="right">{fila.description}</TableCell>
-                            <TableCell align="right"><AddIcon onClick={handleOpen}/></TableCell>
+                            <TableCell align="right"><AddIcon onClick={() => handleOpen(fila)}/>
+                            <DeleteIcon onClick={() => deleteEmergency(fila.number,false)}/></TableCell>
                             <ModalMarvel open={open}handleClose={handleClose}/>
                             
                         </TableRow>

@@ -8,13 +8,16 @@ import {
   useEmergency,
 } from "../../context/EmergencyContext/EmergencyContext";
 import { useState } from "react";
+import TablaA from "../../common/Tabla/TablaA";
 
+let count = 1;
 const Main = () => {
   const { addEmergency } = useEmergency();
   const [emergency, setEmergency] = useState("");
-  let count = 1;
+  
   const handleAddEmergency = () => {
-    const number = count++;
+    const number = count;
+    count++;
     const description = emergency;
 
     addEmergency(number, description);
@@ -27,7 +30,7 @@ const Main = () => {
         justifyContent="center"
         alignItems="center"
         gap={2}
-        mt={2} // Ajusta según tu necesidad
+        mt={2} 
       >
         <Tipografia texto={"Emergencia"} variant={"h6"} />
         <Barra onChange={(e) => setEmergency(e.target.value)} label={" "} />
@@ -41,15 +44,27 @@ const Main = () => {
       <Tipografia texto={"Emergencias sin asignar"} variant={"h6"} />
 
       <Box
-        maxWidth={900} // Ajusta aquí
+        maxWidth={900} 
         display="flex"
         justifyContent="center"
         alignItems="center"
-        flexDirection="column" // Cambiado a columna para centrar la tabla debajo de los otros elementos
+        flexDirection="column" 
         textAlign={"center"}
         margin={"auto"}
       >
         <Tabla />
+      </Box>
+      <Tipografia texto={"Emergencias asignadas"} variant={"h6"} />
+      <Box
+        maxWidth={900} 
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        flexDirection="column" 
+        textAlign={"center"}
+        margin={"auto"}
+      >
+        <TablaA/>
       </Box>
     </div>
   );
