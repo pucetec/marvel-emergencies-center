@@ -10,6 +10,9 @@ export const ProveedorDeContexto = ({ children }) => {
   const [listAsignadas,      setListAsignadas]      = useState([]);
   const [listAsignadasHeroe, setListAsignadasHeroe] = useState([]);
   const [heroe,              setHeroe]              = useState("");
+  const [preguntaBorrar,     setPreguntaBorrar]     = useState(false);
+  const [indice,             setIndice]             = useState(null);    
+
 
   const listaHeroes = ["Iron Man", "Thor", "Hulk", "Spider-Man", "Capitán América",
    "Doctor Strange", "Ant-Man", "Wolverine"];
@@ -34,9 +37,9 @@ export const ProveedorDeContexto = ({ children }) => {
   const regresanLosItems = (item) => { setList( (prevList) => { return [...prevList, item] } ) };
 
 
-  const borrarElementoIngresos = (i) => {
+  const borrarElementoIngresos = () => {
     const listaNueva = [...list];
-    listaNueva.splice(i, 1);
+    listaNueva.splice(indice, 1);
     setList(listaNueva);
   };
 
@@ -54,7 +57,7 @@ export const ProveedorDeContexto = ({ children }) => {
   return (
     <Contexto.Provider value = {{ list, emergencia, setEmergencia, addItems, listAsignadas, addItemsSeleccionados,
      borrarElementoIngresos, borrarElementoAsignados, heroe, setHeroe, listaHeroes, regresanLosItems,
-     listAsignadasHeroe, setListAsignadasHeroe, modal, setModal }}>
+     listAsignadasHeroe, setListAsignadasHeroe, modal, setModal, preguntaBorrar, setPreguntaBorrar, setIndice }}>
       { children }
     </Contexto.Provider>
   );
