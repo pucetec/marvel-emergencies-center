@@ -34,7 +34,7 @@ const style = {
 function App() {
   const [emergencyInput, setEmergencyInput] = useState("");
   const [emergenciesSinAsignar, setEmergenciesSinAsignar] = useState([
-    "Robo en Fake street 1234", //Incidencia preexistente
+    "Robo en Fake street 1234",
   ]);
   const [emergenciesAsignadas, setEmergenciesAsignadas] = useState([]);
   const [open, setOpen] = useState(false);
@@ -60,7 +60,7 @@ function App() {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setSelectedAssignedEmergency(null); // Restablecer después de cerrar el cuadro de diálogo
+    setSelectedAssignedEmergency(null);
   };
 
   const handleEmergencyInputChange = (event) => {
@@ -68,58 +68,63 @@ function App() {
   };
 
   const handleIngresar = () => {
-    // Verificar si el input no está vacío antes de agregar la emergencia
     if (emergencyInput.trim() !== "") {
       setEmergenciesSinAsignar([...emergenciesSinAsignar, emergencyInput]);
-      setEmergencyInput(""); // Limpiar el input después de ingresar la emergencia
+      setEmergencyInput("");
     }
   };
 
   const handleAsignar = () => {
-    // Verificar si hay una emergencia sin asignar
     if (emergenciesSinAsignar.length > 0) {
-      handleOpen(); // Abrir el cuadro de diálogo al presionar "Asignar"
+      handleOpen();
     }
   };
 
   const handleConfirmAsignar = () => {
-    // Verificar si hay una emergencia sin asignar
     if (emergenciesSinAsignar.length > 0) {
       const emergency = emergenciesSinAsignar[0];
 
-      // Verificar si la emergencia ya está asignada a algún héroe
       const existingAssignment = emergenciesAsignadas.find(
         (item) => item.emergency === emergency
       );
 
       if (existingAssignment) {
-        // Si ya está asignada, actualizamos el héroe
         existingAssignment.hero = selectedHero;
       } else {
-        // Si no está asignada, la asignamos
         setEmergenciesAsignadas([
           ...emergenciesAsignadas,
           { hero: selectedHero, emergency },
         ]);
       }
 
-      // Eliminar la emergencia de "Emergencias sin asignar"
       setEmergenciesSinAsignar(emergenciesSinAsignar.slice(1));
 
-      handleClose(); // Cerrar el cuadro de diálogo después de asignar
+      handleClose();
     }
   };
 
   const handleEliminar = (index) => {
-    const newEmergencies = [...emergenciesSinAsignar];
-    newEmergencies.splice(index, 1);
-    setEmergenciesSinAsignar(newEmergencies);
+    const isConfirmed = window.confirm("¿Estás seguro de eliminarlo?");
+    if (isConfirmed) {
+      const newEmergencies = [...emergenciesSinAsignar];
+      newEmergencies.splice(index, 1);
+      setEmergenciesSinAsignar(newEmergencies);
+      alert("Eliminado correctamente");
+    } else {
+      alert("Operación cancelada");
+    }
   };
 
   const handleEliminarAsignada = (index) => {
-    const newEmergenciesAsignadas = [...emergenciesAsignadas];
-    newEmergenciesAsignadas.splice(index, 1);
-    setEmergenciesAsignadas(newEmergenciesAsignadas);
+    const isConfirmed = window.confirm("¿Estás seguro de eliminarlo?");
+    if (isConfirmed) {
+      const newEmergenciesAsignadas = [...emergenciesAsignadas];
+      newEmergenciesAsignadas.splice(index, 1);
+      setEmergenciesAsignadas(newEmergenciesAsignadas);
+      alert("Eliminado correctamente");
+    } else {
+      alert("Operación cancelada");
+    }
   };
 
   const handleHeroSelection = (event) => {
@@ -129,7 +134,7 @@ function App() {
   const handleReasignar = (index) => {
     const assignedEmergency = emergenciesAsignadas[index];
     setSelectedAssignedEmergency(assignedEmergency);
-    handleOpen(); // Abrir el cuadro de diálogo de asignación
+    handleOpen();
   };
 
   const handleConfirmReasignar = () => {
@@ -138,14 +143,13 @@ function App() {
       const newEmergenciesAsignadas = emergenciesAsignadas.map(
         (assignedEmergency) => {
           if (assignedEmergency === selectedAssignedEmergency) {
-            // Actualizar el héroe asignado
             return { hero: selectedHero, emergency };
           }
           return assignedEmergency;
         }
       );
       setEmergenciesAsignadas(newEmergenciesAsignadas);
-      handleClose(); // Cerrar el cuadro de diálogo después de reasignar
+      handleClose();
     }
   };
 
