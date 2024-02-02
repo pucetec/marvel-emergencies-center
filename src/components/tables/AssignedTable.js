@@ -14,7 +14,7 @@ const AssignedTable = () => {
         <th>Acciones</th>
       </tr>
       {emergencyList.map((item, i) => (
-        <tr>
+        <tr key={emergencyList.i}>
           <td>{i + 1}</td>
           <td>{item.emergency}</td>
           <td>

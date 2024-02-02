@@ -10,7 +10,7 @@ const EmergencyContextProvider = ({ children }) => {
   const handleNewEmergency = (e) => {
     setEmergency(e.target.value);
   };
-  const [emergencyList, setEmergencyList] = useState([""]);
+  const [emergencyList, setEmergencyList] = useState([]);
   const handleEmergencyAdded = () => {
     const tempEmergencyList = { emergency: emergency };
     if (emergency === "") alert("No haz escrito nada");
@@ -20,17 +20,18 @@ const EmergencyContextProvider = ({ children }) => {
       });
     setEmergency("");
   };
-
+  var o = {};
+  console.log("-----------------------------  ");
+  console.log(o.PUBLIC_KEY);
   const [heroes, setHeroes] = useState([]);
-  const Gateway = "https://gateway.marvel.com:443/v1/public/characters?apikey=";
+  const GATEWAY = "https://gateway.marvel.com:443/v1/public/characters?apikey=";
   useEffect(() => {
     const bringMarvelInfo = async () => {
-      const currentTimeStamp = Date.now().toString();
-      const joinedKey = currentTimeStamp + env.PRIVATE_KEY + env.PUBLIC_KEY;
+      const currentTimestamp = Date.now().toString();
+      const joinedKey = currentTimestamp + env.PRIVATE_KEY + env.PUBLIC_KEY;
       const md5Key = md5(joinedKey);
-
       const response = await axios.get(
-        Gateway + env.PUBLIC_KEY + "&ts=" + currentTimeStamp + "&hash=" + md5Key
+        GATEWAY + env.PUBLIC_KEY + "&ts=" + currentTimestamp + "&hash=" + md5Key
       );
       console.log({ response });
       setHeroes(response.data);
@@ -40,6 +41,9 @@ const EmergencyContextProvider = ({ children }) => {
     }
   }, [heroes]);
   const [open, setOpen] = useState(false);
+  const removeEmergency = (i) => {
+    setEmergencyList(emergencyList.filter((item) => i !== item.i));
+  };
   return (
     <EmergencyContext.Provider
       value={{
@@ -47,6 +51,7 @@ const EmergencyContextProvider = ({ children }) => {
         emergencyList,
         handleNewEmergency,
         handleEmergencyAdded,
+        removeEmergency,
         heroes,
         open,
         setOpen,
