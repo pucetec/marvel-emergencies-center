@@ -1,29 +1,14 @@
 import React, { useState } from 'react';
-import {
-  Button,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-  Paper,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Select,
-  MenuItem,
-} from '@mui/material';
+import {Button,Table,TableBody,TableCell,TableContainer,TableHead,TableRow,Paper,Dialog,DialogTitle,DialogContent,DialogActions,} from '@mui/material';
 import DeleteButton from '../Button/DeleteButton';
-import AssignedEmergenciesTable from './AssignedEmergenciesTable';
+import { useHeroes } from '../Contexts/Heroes';
 
-
-const TableI = ({ incidents, onDeleteIncident, onAssignHero }) => {
+const TableI = ({ incidents, onDeleteIncident, onAssignHero, onUpdateAssignedEmergencies }) => {
+  const heroes = useHeroes();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedIncidentIndex, setSelectedIncidentIndex] = useState(null);
-  const [assignedEmergencies, setAssignedEmergencies] = useState([]);
-
+  const [selectedHero, setSelectedHero] = useState(null);
+  const [localAssignedEmergencies, setLocalAssignedEmergencies] = useState([]);
 
   const handleOpenModal = (index) => {
     setSelectedIncidentIndex(index);
@@ -33,18 +18,18 @@ const TableI = ({ incidents, onDeleteIncident, onAssignHero }) => {
   const handleCloseModal = () => {
     setSelectedIncidentIndex(null);
     setModalOpen(false);
+    setSelectedHero(null);
   };
 
   const handleAssignHero = (hero) => {
-    onAssignHero(selectedIncidentIndex, hero); // Primero, llama a la función onAssignHero
-    const updatedEmergencies = [...assignedEmergencies, {
+    onAssignHero(selectedIncidentIndex, hero);
+    const updatedEmergencies = [...localAssignedEmergencies, {
       ...incidents[selectedIncidentIndex],
       hero: hero,
     }];
-    setAssignedEmergencies(updatedEmergencies); // Luego, actualiza el estado con la nueva asignación
-    handleCloseModal(); // Finalmente, cierra el modal
-  
-
+    setLocalAssignedEmergencies(updatedEmergencies);
+    onUpdateAssignedEmergencies(updatedEmergencies);
+    handleCloseModal();
   };
   return (
     <>
@@ -65,7 +50,7 @@ const TableI = ({ incidents, onDeleteIncident, onAssignHero }) => {
                     variant="outlined"
                     onClick={() => handleOpenModal(index)}
                   >
-                    Asignar Héroe
+                    Asignar Heroe
                   </Button>
                   <DeleteButton onConfirmDelete={() => onDeleteIncident(index)} />
                 </TableCell>
@@ -75,26 +60,27 @@ const TableI = ({ incidents, onDeleteIncident, onAssignHero }) => {
         </Table>
       </TableContainer>
 
-
-      {/* Modal para asignar héroe */}
       <Dialog open={modalOpen} onClose={handleCloseModal}>
-        <DialogTitle>Seleccionar Héroe</DialogTitle>
+        <DialogTitle>Seleccionar Heroe</DialogTitle>
         <DialogContent>
-          <Select onChange={(e) => handleAssignHero(e.target.value)}>
-            {/* Lista de héroes */}
-            <MenuItem value="SpiderMan">SpiderMan</MenuItem>
-            <MenuItem value="Batman">Batman</MenuItem>
-            {/* Agrega más héroes según sea necesario */}
-          </Select>
+          {heroes.map((hero) => (
+            <div key={hero} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+              <div>{hero}</div>
+              <Button
+                variant="outlined"
+                onClick={() => handleAssignHero(hero)}
+                style={{ marginLeft: '10px' }}
+              >
+                Asignar
+              </Button>
+            </div>
+          ))}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseModal}>Cancelar</Button>
+          
         </DialogActions>
       </Dialog>
-
-
-      <h2 style={{ marginTop: '20px' }}>Emergencias asignadas</h2>
-      <AssignedEmergenciesTable assignedEmergencies={assignedEmergencies} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-// DeleteButton.js
+
 
 import React, { useState } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions } from '@mui/material';
@@ -15,7 +15,7 @@ const DeleteButton = ({ onConfirmDelete }) => {
   };
 
   const handleConfirmDelete = () => {
-    onConfirmDelete(); // Asegúrate de que onConfirmDelete es una función
+    onConfirmDelete();
     handleCloseDialog();
   };
 
@@ -25,10 +25,10 @@ const DeleteButton = ({ onConfirmDelete }) => {
         Eliminar
       </Button>
       <Dialog open={dialogOpen} onClose={handleCloseDialog}>
-        <DialogTitle>Confirmar Eliminación</DialogTitle>
+        <DialogTitle>Confirmar Eliminacion</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            ¿Estás seguro de que deseas eliminar este elemento?
+            ¿Estas seguro de que deseas eliminar?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
