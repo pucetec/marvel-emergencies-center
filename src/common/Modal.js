@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Typography } from "@mui/material";
-import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong"; // Importar el icono
+import Icon from "./Icon";
 
-const CustomModal = ({ children, title, listItems }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const CustomModal = ({ open, onClose, title, listItems }) => {
+  const [isOpen, setIsOpen] = useState(open);
 
   const handleOpenModal = () => {
     setIsOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsOpen(false);
+    onClose();
   };
 
   const style = {
@@ -28,10 +28,9 @@ const CustomModal = ({ children, title, listItems }) => {
 
   return (
     <div>
-      {/* Cambiar el botón por el icono */}
-      <CenterFocusStrongIcon onClick={handleOpenModal} />
+      <Icon onClick={handleOpenModal} />
       <Modal
-        open={isOpen}
+        open={open}
         onClose={handleCloseModal}
         aria-labelledby="modal-title"
         aria-describedby="modal-description"
@@ -45,7 +44,8 @@ const CustomModal = ({ children, title, listItems }) => {
               <div key={index}>{item}</div>
             ))}
           </div>
-          <button variant="outlined" onClick={handleCloseModal}> {/* Cambiar a un botón HTML regular */}
+          <button variant="outlined" onClick={handleCloseModal}>
+            {" "}
             Cerrar Modal
           </button>
         </div>

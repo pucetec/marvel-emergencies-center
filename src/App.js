@@ -1,21 +1,19 @@
-import React, { useState } from "react"; // Importar useState
+import React, { useState } from "react";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import "./App.css";
 import CustomButton from "./common/Button";
 import List from "./common/List";
 import CustomTextField from "./common/TexField";
-import Icon from "./common/Icon"; 
+import Icon from "./common/Icon";
 import CustomModal from "./common/Modal";
-import MarvelComponent from "./common/MarvelComponent";
-import Table from "./common/Table";
-
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false); // Corregir el uso de useState
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [emergencyText, setEmergencyText] = useState("");
+
   const handleTextFieldChange = (event) => {
-    console.log("Valor del TextField:", event.target.value);
+    setEmergencyText(event.target.value);
   };
 
   const handleIconClick = () => {
@@ -26,23 +24,22 @@ function App() {
     setIsModalOpen(false);
   };
 
-  const emergenciasSinAsignar = [
-    {
-      text: "Emergencia 1 sin asignar",
-      buttonText: "Botón 1",
-      action: <Icon onClick={handleIconClick} />,
-    },
-    {
-      text: "Emergencia 2 sin asignar",
-      buttonText: "Botón 2",
-      action: <Icon onClick={handleIconClick} />,
-    },
-    {
-      text: "Emergencia 3 sin asignar",
-      buttonText: "Botón 3",
-      action: <Icon onClick={handleIconClick} />,
-    },
-  ];
+  const handleIngresarClick = () => {
+    if (emergencyText.trim() !== "") {
+      const newEmergency = {
+        text: emergencyText,
+        buttonText: "Ingresar",
+        action: <Icon onClick={handleIconClick} />,
+      };
+      setEmergencyText("");
+      setEmergenciasSinAsignar((prevEmergencias) => [
+        ...prevEmergencias,
+        newEmergency,
+      ]);
+    }
+  };
+
+  const [emergenciasSinAsignar, setEmergenciasSinAsignar] = useState([]);
 
   const emergenciasAsignadas = [
     {
@@ -59,6 +56,20 @@ function App() {
     },
   ];
 
+  const superheroes = [
+    {
+      text: "Spiderman",
+    },
+    {
+      text: "Scarlet-Spider",
+    },
+    {
+      text: "Superior-Spiderman",
+    },
+  ];
+  const Enviar = [];
+  //la emergencia que le doy click le guardo en un estado global, y cuando le doy a enviar ato las 2 cosas
+
   return (
     <div className="App">
       <Box sx={{ width: "100%", maxWidth: 500 }}>
@@ -70,8 +81,9 @@ function App() {
           <CustomTextField
             label="Emergencia"
             onChange={handleTextFieldChange}
+            value={emergencyText}
           />
-          <CustomButton>Ingresar</CustomButton>
+          <CustomButton onClick={handleIngresarClick}>Ingresar</CustomButton>
         </Typography>
         <Typography variant="h5" gutterBottom>
           Emergencias sin asignar
@@ -81,17 +93,23 @@ function App() {
           Emergencias asignadas
         </Typography>
         <List items={emergenciasAsignadas} componentType="icon" />
-        
+
         <CustomModal
           title="Asigna tu super héroe"
-          listItems={emergenciasSinAsignar.map((item) => (
-            <CustomButton key={item.text}>{item.buttonText}</CustomButton>
+          listItems={superheroes.map((superhero) => (
+            <div key={superhero.text}>
+              <Typography variant="h6" gutterBottom>
+                {superhero.text}
+              </Typography>
+              <CustomButton>
+                {superhero.buttonText}
+                Enviar
+              </CustomButton>
+            </div>
           ))}
           open={isModalOpen}
           onClose={handleModalClose}
-        >
-          <MarvelComponent /> 
-        </CustomModal>
+        />
       </Box>
     </div>
   );
