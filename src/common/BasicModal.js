@@ -1,4 +1,3 @@
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
@@ -23,21 +22,19 @@ export default function BasicModal({ TextoModal, setSelectedHero }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [heroe, setHeroe] = useState("");
+  const [heroe, setHeroe] = useState(["Superman", "Iron Man", ]);
 
   const handleHeroeChange = (event) => {
-    setHeroe(event.target.value);
-  };
-
-  const handleAsignarClick = () => {
-    setSelectedHero(heroe); // Pass the selected hero back to the parent component
-    handleClose();
+    const selectedHero = event.target.value;
+    setHeroe(selectedHero);
+    setSelectedHero(selectedHero); // Assign the selected hero directly
+    handleClose(); // Close the modal after assigning the hero
   };
 
   return (
     <div>
       <Button variant="outlined" color="secondary" onClick={handleOpen}>
-        Asignar
+        Heroes
       </Button>
       <Modal
         open={open}
@@ -47,7 +44,7 @@ export default function BasicModal({ TextoModal, setSelectedHero }) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Asigna tu Superheroe para {TextoModal}
+            Escoge tu Superheroe para {TextoModal}
           </Typography>
           <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
           <Grid item xs={3}>
@@ -61,14 +58,11 @@ export default function BasicModal({ TextoModal, setSelectedHero }) {
               <MenuItem value="" disabled>
                 Seleccione Heroe
               </MenuItem>
-              <MenuItem value={"Heroe 1"}>Heroe 1</MenuItem>
-              <MenuItem value={"Heroe 2"}>Heroe 2</MenuItem>
-              <MenuItem value={"Heroe 3"}>Heroe 3</MenuItem>
+              <MenuItem value={"Superman"}>Superman</MenuItem>
+              <MenuItem value={"Batman"}>Batman</MenuItem>
+              <MenuItem value={"Iron Man"}>Iron Man</MenuItem>
             </Select>
           </Grid>
-          <Button variant="contained" color="primary" onClick={handleAsignarClick}>
-            Asignar
-          </Button>
         </Box>
       </Modal>
     </div>

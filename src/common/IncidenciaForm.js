@@ -41,11 +41,10 @@ function IncidenciaForm() {
       const nuevaIncidencia = {
         id: contador,
         incidencia,
-        hero: selectedHero,
+        hero: "", // Initially, no hero is assigned
       };
       setIncidenciasList([...incidenciasList, nuevaIncidencia]);
       setIncidencia("");
-      setSelectedHero(""); // Reset selectedHero
       setContador(contador + 1);
     } else {
       alert("Por favor, completa todos los campos.");
@@ -59,6 +58,20 @@ function IncidenciaForm() {
       setContador(1);
     }
   };
+  
+  
+  const asignarHeroe = (id, selectedHero) => {
+    const nuevaLista = incidenciasList.map((item) =>
+      item.id === id ? { ...item, hero: selectedHero } : item
+    );
+    setIncidenciasList(nuevaLista);
+  };
+
+  
+
+  const incidentesSinAsignar = incidenciasList.filter((item) => !item.hero);
+  const incidentesAsignados = incidenciasList.filter((item) => item.hero);
+
 
   return (
     <Container maxWidth="md">
@@ -100,19 +113,25 @@ function IncidenciaForm() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {incidenciasList.map((item) => (
+            {incidentesSinAsignar.map((item) => (
               <TableRow key={item.id}>
-                <TableCell>{item.incidencia}</TableCell>
                 <TableCell>{item.id}</TableCell>
+                <TableCell>{item.incidencia}</TableCell>
                 <TableCell>
-                <BasicModal TextoModal={item.incidencia} setSelectedHero={setSelectedHero} />
-                  
+                  <BasicModal TextoModal={item.incidencia} setSelectedHero={setSelectedHero} />
                   <Button
                     variant="outlined"
                     color="secondary"
                     onClick={() => handleEliminarClick(item.id)}
                   >
                     Eliminar
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => asignarHeroe(item.id, selectedHero)}
+                  >
+                    Asignar Héroe
                   </Button>
                   
                 </TableCell>
@@ -135,11 +154,11 @@ function IncidenciaForm() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {incidenciasList.map((item) => (
+            {incidentesAsignados.map((item) => (
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
-                <TableCell>{item.hero = selectedHero}</TableCell>
+                <TableCell>{item.hero}</TableCell>
                 <TableCell>
                   <BasicModal TextoModal={item.incidencia} setSelectedHero={setSelectedHero} />
                   <Button
@@ -148,6 +167,13 @@ function IncidenciaForm() {
                     onClick={() => handleEliminarClick(item.id)}
                   >
                     Eliminar
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    color="primary"
+                    onClick={() => asignarHeroe(item.id, selectedHero)}
+                  >
+                    Asignar Héroe
                   </Button>
                   
                 </TableCell>
