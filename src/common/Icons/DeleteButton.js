@@ -6,7 +6,7 @@ const DeleteButton = () => {
   return (
     <>
       <IconButton>
-        <DeleteButton />
+        <DeleteIcon />
       </IconButton>
     </>
   );

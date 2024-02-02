@@ -3,7 +3,6 @@ import { useEmergencyContext } from "../../context/EmergencyContext";
 
 const InputText = ({ placeholder }) => {
   const { emergency, handleNewEmergency } = useEmergencyContext();
-  console.log(emergency);
   return (
     <div>
       <input

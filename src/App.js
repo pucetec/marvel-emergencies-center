@@ -1,8 +1,9 @@
-import Button from "./common/Button/Button";
 import InputText from "./common/InputText/InputText";
 import Typography from "./common/Typography/Typography";
-import AssignIcon from "./common/Icons/AssignIcon";
 import EmergencyContextProvider from "./context/EmergencyContext";
+import AddEmergencyButton from "./common/Button/AddEmergencyButton";
+import NotAssignedTable from "./components/tables/NotAssignedTable";
+import Modal from "./components/Modal/Modal";
 
 const App = () => {
   return (
@@ -16,19 +17,14 @@ const App = () => {
           <InputText placeholder={"emergencia"} />
         </div>
         <div>
-          <Button value={"Ingresar"} />
+          <AddEmergencyButton value={"Ingresar"} />
         </div>
         <div>
           <Typography level={"h2"}>Emergencias sin asignar</Typography>
         </div>
         <div>
-          <table>
-            <tr>
-              <th>#</th>
-              <th>Emergencia</th>
-              <th>Acciones</th>
-            </tr>
-          </table>
+          <NotAssignedTable />
+          <Modal />
         </div>
         <div>
           <Typography level={"h2"}>Emergencias Asignadas</Typography>
