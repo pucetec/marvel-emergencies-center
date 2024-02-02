@@ -3,8 +3,6 @@ import {
   Container,
   Typography,
   TextField,
-  Select,
-  MenuItem,
   Grid,
   Button,
   Table,
@@ -18,24 +16,36 @@ import BasicModal from "./BasicModal";
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
+  const [incidenciasAsignadasList, setIncidenciasAsignadasList] = useState([]);
   const [incidenciasList, setIncidenciasList] = useState([]);
   const [contador, setContador] = useState(1);
+  const [selectedHero, setSelectedHero] = useState("");
+  
 
   const handleIncidenciaChange = (event) => {
     setIncidencia(event.target.value);
   };
+  
+  /*const handleAsignarHeroe = (id, selectedHero)=>{
+    {incidenciasList.map((item) => (
+      if(item.id === id){
+        incidenciasList.item.hero = selectedHero;
+      };
+    ))}
+     
+  };*/
 
  
-  const handleAsignarClick = () => {
+  const handleAsignarIncidenciaClick = () => {
     if (incidencia !== "") {
       const nuevaIncidencia = {
         id: contador,
         incidencia,
-        
+        hero: selectedHero,
       };
       setIncidenciasList([...incidenciasList, nuevaIncidencia]);
       setIncidencia("");
-      
+      setSelectedHero(""); // Reset selectedHero
       setContador(contador + 1);
     } else {
       alert("Por favor, completa todos los campos.");
@@ -68,7 +78,7 @@ function IncidenciaForm() {
     
         <Grid item xs={2}>
           <Button
-            onClick={handleAsignarClick}
+            onClick={handleAsignarIncidenciaClick}
             variant="contained"
             color="primary"
           >
@@ -92,10 +102,46 @@ function IncidenciaForm() {
           <TableBody>
             {incidenciasList.map((item) => (
               <TableRow key={item.id}>
+                <TableCell>{item.incidencia}</TableCell>
+                <TableCell>{item.id}</TableCell>
+                <TableCell>
+                <BasicModal TextoModal={item.incidencia} setSelectedHero={setSelectedHero} />
+                  
+                  <Button
+                    variant="outlined"
+                    color="secondary"
+                    onClick={() => handleEliminarClick(item.id)}
+                  >
+                    Eliminar
+                  </Button>
+                  
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      <Typography variant="h5" gutterBottom>
+        Emergencias Asignadas
+      </Typography>
+      <TableContainer style={{ marginTop: "20px" }}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell>Emergencia</TableCell>
+              <TableCell>Heroe</TableCell>
+              <TableCell>Acciones</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {incidenciasList.map((item) => (
+              <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
+                <TableCell>{item.hero = selectedHero}</TableCell>
                 <TableCell>
-                  <BasicModal TextoModal={item.incidencia}/>
+                  <BasicModal TextoModal={item.incidencia} setSelectedHero={setSelectedHero} />
                   <Button
                     variant="outlined"
                     color="secondary"

@@ -1,8 +1,11 @@
+
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
+import { useState } from 'react';
+import { Grid, Select, MenuItem } from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -16,20 +19,26 @@ const style = {
   p: 4,
 };
 
-export default function BasicModal({TextoModal}) {
+export default function BasicModal({ TextoModal, setSelectedHero }) {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [heroe, setHeroe] = useState("");
+
+  const handleHeroeChange = (event) => {
+    setHeroe(event.target.value);
+  };
+
+  const handleAsignarClick = () => {
+    setSelectedHero(heroe); // Pass the selected hero back to the parent component
+    handleClose();
+  };
 
   return (
     <div>
-        <Button
-          variant="outlined"
-          color="secondary"
-          onClick={handleOpen}
-        >
+      <Button variant="outlined" color="secondary" onClick={handleOpen}>
         Asignar
-        </Button>
+      </Button>
       <Modal
         open={open}
         onClose={handleClose}
@@ -38,12 +47,28 @@ export default function BasicModal({TextoModal}) {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Asigna tu Superheroe {TextoModal}
+            Asigna tu Superheroe para {TextoModal}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
-          
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}></Typography>
+          <Grid item xs={3}>
+            <Typography variant="subtitle1">Heroe:</Typography>
+            <Select
+              value={heroe}
+              onChange={handleHeroeChange}
+              displayEmpty
+              fullWidth
+            >
+              <MenuItem value="" disabled>
+                Seleccione Heroe
+              </MenuItem>
+              <MenuItem value={"Heroe 1"}>Heroe 1</MenuItem>
+              <MenuItem value={"Heroe 2"}>Heroe 2</MenuItem>
+              <MenuItem value={"Heroe 3"}>Heroe 3</MenuItem>
+            </Select>
+          </Grid>
+          <Button variant="contained" color="primary" onClick={handleAsignarClick}>
+            Asignar
+          </Button>
         </Box>
       </Modal>
     </div>
