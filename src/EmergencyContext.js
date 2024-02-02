@@ -1,4 +1,3 @@
-// EmergencyContext.js
 import React, { createContext, useState } from 'react';
 
 export const EmergencyContext = createContext();
@@ -8,7 +7,8 @@ export const EmergencyProvider = ({ children }) => {
   const [heroes, setHeroes] = useState([
     { id: 1, name: 'Spiderman' },
     { id: 2, name: 'Iron Man' },
-    // Añade más héroes aquí...
+    {id: 3, name: 'Batman'},
+    { id: 4, name: 'Hulk'}
   ]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [selectedEmergencyId, setSelectedEmergencyId] = useState(null);
@@ -18,7 +18,7 @@ export const EmergencyProvider = ({ children }) => {
       id: emergencies.length + 1,
       description,
       heroId: null
-    };
+    };  
     setEmergencies(prevEmergencies => [...prevEmergencies, newEmergency]);
   };
 

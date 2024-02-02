@@ -1,11 +1,9 @@
-// EmergencyList.js
 import React, { useContext } from 'react';
 import { EmergencyContext } from './EmergencyContext';
 
 const EmergencyList = () => {
   const { emergencies, assignHeroToEmergency, removeEmergency, openModal, heroes } = useContext(EmergencyContext);
 
-  // Encuentra el nombre del héroe basado en el heroId
   const getHeroName = (heroId) => {
     const hero = heroes.find(h => h.id === heroId);
     return hero ? hero.name : 'Sin héroe asignado';
