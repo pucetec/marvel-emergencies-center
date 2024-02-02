@@ -42,8 +42,11 @@ export const HeroProvider = ({ children }) => {
   const [currentEmergency, setCurrentEmergency] = useState(null);
   const [currentHeroe, setCurrentHeroe] = useState("");
 
-  const openModal = (emergencyName) => {
+  const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  const setEmergency = (emergencyName) => {
     setCurrentEmergency(emergencyName);
   };
 
@@ -61,7 +64,9 @@ export const HeroProvider = ({ children }) => {
   }, []);
 
   const updateAssignedemergensyList = (newItem) => {
+    let { id } = newItem;
     setAssignedEmergencyList((prevList) => [...prevList, newItem]);
+    deleteFromEmergencyList(id);
   };
 
   const updateEmergencyList = (newItem) => {
@@ -69,12 +74,22 @@ export const HeroProvider = ({ children }) => {
   };
 
   const deleteFromEmergencyList = (id) => {
-    setEmergencyList((prevList) => prevList.filter((item) => item.id !== id));
+    let resultado = window.confirm(
+      "¿Deseas borrar este elemento? (Si es para ASIGNAR pulsa 'Aceptar')"
+    );
+    if (resultado === true) {
+      setEmergencyList((prevList) => prevList.filter((item) => item.id !== id));
+    } else {
+    }
   };
   const deleteFromAssignedList = (id) => {
-    setAssignedEmergencyList((prevList) =>
-      prevList.filter((item) => item.id !== id)
-    );
+    let resultado = window.confirm("¿Deseas borrar este elemento?");
+    if (resultado === true) {
+      setAssignedEmergencyList((prevList) =>
+        prevList.filter((item) => item.id !== id)
+      );
+    } else {
+    }
   };
 
   return (
@@ -94,6 +109,7 @@ export const HeroProvider = ({ children }) => {
         updateAssignedemergensyList,
         deleteFromAssignedList,
         setAssignedEmergencyList,
+        setEmergency,
       }}
     >
       {children}

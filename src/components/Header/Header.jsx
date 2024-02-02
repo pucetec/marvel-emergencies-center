@@ -8,7 +8,7 @@ import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
 
 export const Header = () => {
   const [inputValue, setInputValue] = useState("");
-  const { emergencyList, updateEmergencyList } = useMarvelAPI();
+  const { emergencyList, updateEmergencyList, setEmergency } = useMarvelAPI();
 
   const onInputChange = (event) => {
     setInputValue(event.target.value);
@@ -17,15 +17,18 @@ export const Header = () => {
   const onSubmit = (event) => {
     event.preventDefault();
     const newItem = {
-      id: emergencyList.length, // Usa la longitud actual de la lista como ID, aunque no es lo ideal ya que se puede terminar repitiendo.
+      id: emergencyList.length + 1, // Usa la longitud actual de la lista como ID, aunque no es lo ideal ya que se puede terminar repitiendo.
       name: inputValue,
       focusIcon: <CenterFocusStrongIcon fontSize="large" />,
       trashIcon: <DeleteIcon fontSize="large" />,
     };
 
     updateEmergencyList(newItem);
-    setInputValue("");
+    setEmergency(inputValue);
   };
+  // useEffect(() => {
+  //   setInputValue("");
+  // }, []);
 
   return (
     <>
@@ -48,6 +51,7 @@ export const Header = () => {
             id={"input"}
             placeholder={"Ingresa un emergencia..."}
             onChange={onInputChange}
+            value={inputValue}
           />
         </form>
         <Button

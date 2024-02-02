@@ -26,9 +26,7 @@ const AssignedGrid = () => {
               <div>{element.heroName}</div>
             </MaterialGrid>
             <MaterialGrid item xs={1} md={1} xl={1}>
-              <div onClick={() => openModal(element.heroName)}>
-                {element.focusIcon}
-              </div>
+              <div onClick={() => openModal()}>{element.focusIcon}</div>
             </MaterialGrid>
             <MaterialGrid item xs={1} md={1} xl={1}>
               <div onClick={() => deleteFromAssignedList(element.id)}>

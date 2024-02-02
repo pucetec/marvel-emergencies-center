@@ -11,18 +11,33 @@ export const HeoresGrid = () => {
     assignedEmergensyList,
     currentEmergency,
     updateAssignedemergensyList,
+    closeModal,
   } = useMarvelAPI();
   const results = data?.data?.data?.results;
 
   const handleGetHero = (heroName) => {
     const newItem = {
-      id: assignedEmergensyList.length, // Usa la longitud actual de la lista como ID, aunque no es lo ideal ya que se puede terminar repitiendo.
+      id: assignedEmergensyList.length + 1, // Usa la longitud actual de la lista como ID, aunque no es lo ideal ya que se puede terminar repitiendo.
       emergencyName: currentEmergency,
       heroName: heroName,
       focusIcon: <CenterFocusStrongIcon fontSize="large" />,
       trashIcon: <DeleteIcon fontSize="large" />,
     };
+
+    closeModal();
+    const temp = assignedEmergensyList.filter(
+      (element) => element.emergencyName !== currentEmergency
+    );
+    console.log({ temp });
+    console.log({ currentEmergency });
+    // if (
+
+    // ) {
+    //   console.log("Hola");
+    // } else {
     updateAssignedemergensyList(newItem);
+    //   console.log("no sirve");
+    // }
   };
   return (
     <div>
