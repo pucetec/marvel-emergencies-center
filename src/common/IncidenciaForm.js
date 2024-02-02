@@ -36,7 +36,7 @@ function IncidenciaForm() {
         `https://gateway.marvel.com:443/v1/public/characters?apikey=f39b8cbf694e51e2ae6d129d7a97c448`
       );
       const data = await response.json();
-      console.log(data); // Imprimir la respuesta en la consola
+      console.log(data); 
       setMarvelData(data);
       setOpenDialog(true);
     } catch (error) {
@@ -66,6 +66,15 @@ function IncidenciaForm() {
     if (nuevaLista.length === 0) {
       setContador(1);
     }
+  };
+  const handleAsignarHeroeToEmergencia = () => {
+    const nuevaIncidencia = {
+      id: contador,
+      incidencia: "IronMan", // Puedes ajustar esto según tus necesidades
+    };
+    setIncidenciasList([...incidenciasList, nuevaIncidencia]);
+    setContador(contador + 1);
+    handleDialogClose();
   };
 
   return (
@@ -133,36 +142,94 @@ function IncidenciaForm() {
           </TableBody>
         </Table>
       </TableContainer>
+      <Typography variant="h6" gutterBottom>
+      Emergencias Asignadas
+    </Typography>
+    <TableContainer style={{ marginTop: "20px" }}>
+      <Table>
+        <TableHead>
+          <TableRow>
+            <TableCell>#</TableCell>
+            <TableCell>Emergencia</TableCell>
+            <TableCell>Heroe</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {incidenciasList.map((item) => (
+            <TableRow key={item.id}>
+              <TableCell>{item.id}</TableCell>
+              {/* <TableCell>{item.incidencia}</TableCell> */}
+              <TableCell>
+                {/* <Button
+                  onClick={() => handleEliminarClick(item.id)}
+                  variant="contained"
+                  color="secondary"
+                  style={{ marginRight: "8px", width: "100%" }}
+                >
+                  Eliminar
+                </Button> */}
+                {item.incidencia === "IronMan" && (
+                  <ButtonAsignH
+                    variant="contained"
+                    color="secondary"
+                    style={{ width: "100%" }}
+                  >
+                    AsignarH
+                  </ButtonAsignH>
+                )}
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
 
       {/* Dialog para mostrar cuando se presiona AsignarH */}
       <Dialog open={openDialog} onClose={handleDialogClose}>
-        <DialogTitle>Personajes de Marvel</DialogTitle>
-        <DialogContent>
-          {marvelData && marvelData.data && marvelData.data.results ? (
-            marvelData.data.results.map((character) => (
-              <div key={character.id}>
-                <img
-                  src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
-                  alt={character.name}
-                  style={{ width: 50, height: 50, marginRight: 10 }}
-                />
-                {character.name}
-              </div>
-            ))
-          ) : (
-            <Typography>
-              {marvelData
-                ? "No se encontraron personajes."
-                : "Cargando datos..."}
-            </Typography>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            Cerrar
-          </Button>
-        </DialogActions>
-      </Dialog>
+  <DialogTitle>Personajes de Marvel</DialogTitle>
+  <DialogContent>
+    {marvelData && marvelData.data && marvelData.data.results ? (
+      marvelData.data.results.slice(0, 5).map((character) => (
+        <Button
+          key={character.id}
+          variant="contained"
+          color="secondary"
+          style={{ marginBottom: 10, width: "100%" }}
+          onClick={() => {
+            console.log("Personaje seleccionado:", character.name);
+            handleAsignarHeroeToEmergencia();
+          }}
+        >
+          <img
+            src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+            alt={character.name}
+            style={{ width: 50, height: 50, marginRight: 10 }}
+          />
+          {character.name}
+        </Button>
+      ))
+    ) : (
+      <Button
+        variant="contained"
+        color="secondary"
+        style={{ marginBottom: 10, width: "100%" }}
+        onClick={() => {
+          console.log("Personaje seleccionado: IronMan");
+          handleAsignarHeroeToEmergencia();
+        }}
+      >
+        <Typography variant="h4" gutterBottom>
+          IronMan
+        </Typography>
+      </Button>
+    )}
+  </DialogContent>
+  <DialogActions>
+    <Button onClick={handleDialogClose} color="primary">
+      Cerrar
+    </Button>
+  </DialogActions>
+</Dialog>
     </Container>
   );
 }
