@@ -53,6 +53,20 @@ function IncidenciaForm() {
     setModalOpen(false);
   };
 
+  const handleHeroAssignment = (selectedHero) => {
+    const updatedList = incidenciasList.map((item) =>
+      item.id === selectedHero.id
+        ? {
+            ...item,
+            hero: selectedHero.incidencia,
+            asignaciones: (item.asignaciones || 0) + 1,
+          }
+        : item
+    );
+    setIncidenciasList(updatedList);
+    setModalOpen(false);
+  };
+
   return (
     <Container maxWidth="md">
       <Typography variant="h4" gutterBottom>
@@ -69,7 +83,6 @@ function IncidenciaForm() {
           />
         </Grid>
         <Grid item xs={2}>
-          {/* Botón Asignar */}
           <Button
             onClick={handleAsignarClick}
             variant="contained"
@@ -95,13 +108,10 @@ function IncidenciaForm() {
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
                 <TableCell>
-                  {/* Ícono Asignar en la fila de acciones */}
-                  <AddCircleIcon onClick={handleAddCircleClick}
-                    style={{ cursor: "pointer", marginRight: "5px" }}>
-                    
-                    
-                  </AddCircleIcon>
-                  {/* Ícono Eliminar en la fila de acciones */}
+                  <AddCircleIcon
+                    onClick={handleAddCircleClick}
+                    style={{ cursor: "pointer", marginRight: "5px" }}
+                  />
                   <DeleteIcon
                     onClick={() => handleEliminarClick(item.id)}
                     style={{ cursor: "pointer" }}
@@ -113,13 +123,18 @@ function IncidenciaForm() {
         </Table>
       </TableContainer>
       <h4>EMERGENCIAS ASIGNADAS</h4>
-      <SimpleModal modal = {modalOpen} close = {handleCloseModal}></SimpleModal> 
+      <SimpleModal
+        modal={modalOpen}
+        close={handleCloseModal}
+        assignHero={handleHeroAssignment}
+      />
       <TableContainer style={{ marginTop: "20px" }}>
         <Table>
           <TableHead>
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Emergencias</TableCell>
+              <TableCell>Héroes</TableCell>
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
@@ -128,15 +143,14 @@ function IncidenciaForm() {
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
+                <TableCell>{item.hero || 'No asignado'}</TableCell>
                 <TableCell>
-                  {/* Ícono Eliminar en la fila de acciones */}
                   <DeleteIcon
                     onClick={() => handleEliminarClick(item.id)}
                     style={{ cursor: "pointer" }}
                   />
-                  {/* Ícono Asignar en la fila de acciones */}
                   <AddCircleIcon
-                    onClick={handleAddCircleClick}
+                    onClick={() => handleAddCircleClick(item)}
                     style={{ cursor: "pointer", marginRight: "5px" }}
                   />
                 </TableCell>
@@ -145,7 +159,6 @@ function IncidenciaForm() {
           </TableBody>
         </Table>
       </TableContainer>
-      <SimpleModal open={modalOpen} onClose={handleCloseModal} />
     </Container>
   );
 }
