@@ -13,18 +13,33 @@ import {
   TableBody,
   TableRow,
   TableCell,
+  Alert,
 } from "@mui/material";
 import Box from "@mui/material/Box";
 import Popper from "@mui/material/Popper";
 import BasicModal from "./Modal/Modal";
-
-
 
 function IncidenciaForm() {
   const [incidencia, setIncidencia] = useState("");
   const [policia, setPolicia] = useState("");
   const [incidenciasList, setIncidenciasList] = useState([]);
   const [contador, setContador] = useState(1);
+  const [hero, setHero] = useState(false);
+  const Hero = ({ item }) => {
+    if (hero === true) {
+      return <TableCell>{item}</TableCell>;
+    } else return <TableCell></TableCell>;
+  };
+
+  const functionHero = (id) => {
+    setHero(true);
+    //  { const nuevaLista = incidenciasList.map((item) => {
+    //     if (item.id === id) {
+    //       item.policia = policia;
+    //     }
+    //   });
+    //   setIncidenciasList(nuevaLista);}
+  };
 
   const handleIncidenciaChange = (event) => {
     setIncidencia(event.target.value);
@@ -51,6 +66,8 @@ function IncidenciaForm() {
   };
 
   const handleEliminarClick = (id) => {
+    const vara = alert("estas seguro que deseas eliminar");
+    console.log(vara);
     const nuevaLista = incidenciasList.filter((item) => item.id !== id);
     setIncidenciasList(nuevaLista);
     if (nuevaLista.length == 0) {
@@ -101,22 +118,22 @@ function IncidenciaForm() {
           />
         </Grid>
         {/*
-        <Grid item xs={3}>
-          <Typography variant="subtitle1">Policía:</Typography>
-          <Select
-            value={policia}
-            onChange={handlePoliciaChange}
-            displayEmpty
-            fullWidth
-          >
-            <MenuItem value="" disabled>
-              Seleccione Policía
-            </MenuItem>
-            <MenuItem value={"Policía 1"}>Policía 1</MenuItem>
-            <MenuItem value={"Policía 2"}>Policía 2</MenuItem>
-            <MenuItem value={"Policía 3"}>Policía 3</MenuItem>
-          </Select>
-        </Grid>
+          <Grid item xs={3}>
+            <Typography variant="subtitle1">Heroe:</Typography>
+            <Select
+              value={policia}
+              onChange={handlePoliciaChange}
+              displayEmpty
+              fullWidth
+            >
+              <MenuItem value="" disabled>
+                Seleccione Heroe
+              </MenuItem>
+              <MenuItem value={"Policía 1"}>Heroe 1</MenuItem>
+              <MenuItem value={"Policía 2"}>Heroe 2</MenuItem>
+              <MenuItem value={"Policía 3"}>Heroe 3</MenuItem>
+            </Select>
+          </Grid>
   */}
         <Grid item xs={2}>
           <Button
@@ -135,9 +152,9 @@ function IncidenciaForm() {
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Emergencia</TableCell>
-              {/*
-              <TableCell>Policía</TableCell>
-              */}
+
+              <TableCell>Heroes</TableCell>
+
               <TableCell>Acciones</TableCell>
             </TableRow>
           </TableHead>
@@ -146,7 +163,7 @@ function IncidenciaForm() {
               <TableRow key={item.id}>
                 <TableCell>{item.id}</TableCell>
                 <TableCell>{item.incidencia}</TableCell>
-                {/* </TableRow>TableCell>{item.policia}</TableCell> */}
+
                 <TableCell>
                   <Button
                     variant="outlined"
@@ -155,11 +172,34 @@ function IncidenciaForm() {
                   >
                     Eliminar
                   </Button>
-                  <BasicModal TextoMOD={item.incidencia}  />
-                 
-                 
-              
+                  <BasicModal
+                    TextoMOD={item.id}
+                    functionHero={(id) => functionHero(id)}
+                  ></BasicModal>
+                  <Grid item xs={3}>
+                    <Typography variant="subtitle1">Heroe:</Typography>
+                    <Select
+                      value={policia}
+                      onChange={handlePoliciaChange}
+                      displayEmpty
+                      fullWidth
+                    >
+                      <MenuItem value="" disabled>
+                        Seleccione Heroe
+                      </MenuItem>
+                      <MenuItem TextoMOD={"sds"} value={"Iron Man"}>
+                        Iron Man
+                      </MenuItem>
+                      <MenuItem TextoMOD={"sds"} value={"Spider Man"}>
+                        Spider Man
+                      </MenuItem>
+                      <MenuItem TextoMOD={"sds"} value={"Heroe 3"}>
+                        Heroe 3
+                      </MenuItem>
+                    </Select>
+                  </Grid>
                 </TableCell>
+                <Hero item={policia}></Hero>
               </TableRow>
             ))}
           </TableBody>
