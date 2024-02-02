@@ -1,7 +1,6 @@
 import React from "react";
 import { Button as MaterialButton } from "@mui/material";
-
-const Button = ({ variant, onClick, value, href, className }) => {
+const Button = ({ variant, onClick, value, href, className, disabled }) => {
   return (
     <>
       <MaterialButton
@@ -9,6 +8,7 @@ const Button = ({ variant, onClick, value, href, className }) => {
         onClick={onClick}
         href={href}
         className={className}
+        disabled={disabled}
       >
         {value}
       </MaterialButton>
