@@ -41,6 +41,11 @@ export const HeroProvider = ({ children }) => {
   const [assignedEmergensyList, setAssignedEmergencyList] = useState([]);
   const [currentEmergency, setCurrentEmergency] = useState(null);
   const [currentHeroe, setCurrentHeroe] = useState("");
+  const [currentId, setCurrentId] = useState(null);
+
+  const getCurrentId = (id) => {
+    setCurrentId(id);
+  };
 
   const openModal = () => {
     setIsModalOpen(true);
@@ -110,6 +115,8 @@ export const HeroProvider = ({ children }) => {
         deleteFromAssignedList,
         setAssignedEmergencyList,
         setEmergency,
+        getCurrentId,
+        currentId,
       }}
     >
       {children}

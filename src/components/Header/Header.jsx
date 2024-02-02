@@ -5,10 +5,11 @@ import Typography from "../../common/Typography/Typography";
 import { useMarvelAPI } from "../../contexts/HeroContext";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CenterFocusStrongIcon from "@mui/icons-material/CenterFocusStrong";
+import { v4 as uuidv4 } from "uuid";
 
 export const Header = () => {
   const [inputValue, setInputValue] = useState("");
-  const { emergencyList, updateEmergencyList, setEmergency } = useMarvelAPI();
+  const { updateEmergencyList, setEmergency, getCurrentId } = useMarvelAPI();
 
   const onInputChange = (event) => {
     setInputValue(event.target.value);
@@ -16,8 +17,10 @@ export const Header = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
+    let id = uuidv4();
+    getCurrentId(id);
     const newItem = {
-      id: emergencyList.length + 1, // Usa la longitud actual de la lista como ID, aunque no es lo ideal ya que se puede terminar repitiendo.
+      id: id, //El id es único para cada emergencia y ya no hay problema de que se reasignen id's, y también viaja a través del contexto.
       name: inputValue,
       focusIcon: <CenterFocusStrongIcon fontSize="large" />,
       trashIcon: <DeleteIcon fontSize="large" />,
@@ -26,9 +29,6 @@ export const Header = () => {
     updateEmergencyList(newItem);
     setEmergency(inputValue);
   };
-  // useEffect(() => {
-  //   setInputValue("");
-  // }, []);
 
   return (
     <>
