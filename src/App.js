@@ -1,7 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "./common/Table/Table";
 import { Box, Button, Container, Grid, Modal, Paper, Typography, TextField } from "@mui/material";
 import { SuperheroesProvider, useSuperheroesContext } from "./common/Contextos/SuperheroesContext";
+import axios from "axios";
+import md5 from "md5";
+import env from "react-dotenv";
+
+//gateway portman url
+const GATEWAY = "https://web.postman.co/workspace/My-Workspace~5c4c062d-6b67-4e8e-8f03-194eab28e8fe/request/32580586-998300ff-99ee-43c5-af46-d4f1863c1641"
 
 // Estilos y estilos de botones y secciones
 const style = {
@@ -23,6 +29,27 @@ const buttonStyle = {
 const sectionStyle = {
   marginBottom: 20,
   padding: 20,
+};
+
+
+// Marvel logic
+const bringMarvelInfo = async () => {
+  try {
+      const currentTimestamp = Date.now().toString();
+      const joinedKey = currentTimestamp + env.PRIVATE_KEY + env.PUBLIC_KEY;
+      const md5Key = md5(joinedKey);
+      const response = await axios.get(
+          GATEWAY + "?apikey=" + env.PUBLIC_KEY + "&ts=" + currentTimestamp + "&hash=" + md5Key,
+          {
+              headers: {
+                  Accept: "application/json",
+              },
+          }
+      );
+      console.log(response.data); // o cualquier otra lógica para manejar la respuesta
+  } catch (error) {
+      console.error("Error al obtener información de Marvel:", error);
+  }
 };
 
 // Componente funcional para mostrar las emergencias asignadas
@@ -85,7 +112,16 @@ function EmergencyAssignmentModal({ onAssignSuperhero, open, handleClose }) {
 }
 
 function App() {
-  // Estados para manejar emergencias asignadas, modal y valores de entrada
+ 
+
+  // Codigo para tratar de traer los personales de malvel 
+  // useEffect(() => {
+  //   axios.get('https://web.postman.co/workspace/My-Workspace~5c4c062d-6b67-4e8e-8f03-194eab28e8fe/request/32580586-998300ff-99ee-43c5-af46-d4f1863c1641');
+  // }, []);
+
+
+
+
   const [assignedEmergencies, setAssignedEmergencies] = useState([]);
   const [open, setOpen] = useState(false);
   const [inputValue, setInputValue] = useState("");
@@ -120,11 +156,19 @@ function App() {
   };
 
   const handleDeleteEmergency = (index) => {
-    // Eliminar emergencia según el índice
-    const updatedEmergencies = [...assignedEmergencies];
-    updatedEmergencies.splice(index, 1);
-    setAssignedEmergencies(updatedEmergencies);
-  };
+    const confirmResult = window.confirm("¿Estás seguro de eliminar?");
+
+    if (confirmResult === true) {
+        // Eliminar emergencia según el índice
+        const updatedEmergencies = [...assignedEmergencies];
+        updatedEmergencies.splice(index, 1);
+        setAssignedEmergencies(updatedEmergencies);
+
+        window.alert("Eliminado Correctamente");
+    } else {
+        window.alert("No se eliminó");
+    }
+};
 
   const handleInputChange = (event) => {
     // Manejar cambios en el campo de entrada
@@ -162,9 +206,8 @@ function App() {
               Ingresar
             </Button>
             <Table
-              headers={["#", "Emergencia", "Acciones"]}
+              headers={["#", "Clase de Emergencia"]}
               bodyRows={emergenciesToAssign.map((emergency, index) => [
-                index + 1,
                 // Número de emergencia en negrita, detalles de la emergencia y botón de asignar
                 <strong>{`Emergencia ${index + 1}: `}</strong>,
                 `${emergency}`,
