@@ -5,13 +5,14 @@ const Contexto = createContext();
 
 export const ProveedorDeContexto = ({ children }) => {
 
-  const [emergencia,         setEmergencia]         = useState("");
-  const [list,               setList]               = useState([]);
-  const [listAsignadas,      setListAsignadas]      = useState([]);
-  const [listAsignadasHeroe, setListAsignadasHeroe] = useState([]);
-  const [heroe,              setHeroe]              = useState("");
-  const [preguntaBorrar,     setPreguntaBorrar]     = useState(false);
-  const [indice,             setIndice]             = useState(null);    
+  const [emergencia,              setEmergencia]              = useState("");
+  const [list,                    setList]                    = useState([]);
+  const [listAsignadas,           setListAsignadas]           = useState([]);
+  const [listAsignadasHeroe,      setListAsignadasHeroe]      = useState([]);
+  const [heroe,                   setHeroe]                   = useState("");
+  const [preguntaBorrar,          setPreguntaBorrar]          = useState(false);
+  const [indice,                  setIndice]                  = useState(null);
+  const [preguntaBorrarAsignadas, setPreguntaBorrarAsignadas] = useState(false);
 
 
   const listaHeroes = ["Iron Man", "Thor", "Hulk", "Spider-Man", "Capitán América",
@@ -44,12 +45,12 @@ export const ProveedorDeContexto = ({ children }) => {
   };
 
 
-  const borrarElementoAsignados = (i) => {
+  const borrarElementoAsignados = (indice) => {
     const listaNuevaAsignadas = [...listAsignadas];
-    listaNuevaAsignadas.splice(i, 1);
+    listaNuevaAsignadas.splice(indice, 1);
     setListAsignadas(listaNuevaAsignadas);
     const listaNuevaAsignadasHeroe = [...listAsignadasHeroe];
-    listaNuevaAsignadasHeroe.splice(i, 1);
+    listaNuevaAsignadasHeroe.splice(indice, 1);
     setListAsignadasHeroe(listaNuevaAsignadasHeroe);
   };
 
@@ -57,7 +58,8 @@ export const ProveedorDeContexto = ({ children }) => {
   return (
     <Contexto.Provider value = {{ list, emergencia, setEmergencia, addItems, listAsignadas, addItemsSeleccionados,
      borrarElementoIngresos, borrarElementoAsignados, heroe, setHeroe, listaHeroes, regresanLosItems,
-     listAsignadasHeroe, setListAsignadasHeroe, modal, setModal, preguntaBorrar, setPreguntaBorrar, setIndice }}>
+     listAsignadasHeroe, setListAsignadasHeroe, modal, setModal, preguntaBorrar, setPreguntaBorrar, setIndice,
+     preguntaBorrarAsignadas, setPreguntaBorrarAsignadas }}>
       { children }
     </Contexto.Provider>
   );
