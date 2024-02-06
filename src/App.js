@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { ProveedorDeContexto } from "./contexts/Contexto";
+import Titulo from "../src/components/Titulo/Titulo";
+import Ingreso from "./components/Ingreso/Ingreso";
+import Asignamiento from "./components/Asignamiento/Asignamiento";
 
-function App() {
+
+const App = () => {
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ProveedorDeContexto>
+      <div id="contenedor-general" style = {{ textAlign: "center" }}>
+        <div id="parte-superior" >
+          <Titulo />
+          <label> <small> Después de ingresar la emergencia, click en [ 1 Héroe ] , y luego click en [ 2 Asignar ] </small> </label>
+        </div>
+        <div id="ingresos">
+          <Ingreso />
+        </div>
+        <div id="asignaciones">
+          <Asignamiento />
+        </div>
+      </div>
+    </ProveedorDeContexto>
   );
-}
+
+};
 
 export default App;
+

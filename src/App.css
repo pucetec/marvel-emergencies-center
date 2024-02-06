@@ -1,38 +1,131 @@
-.App {
-  text-align: center;
+body {
+  background-image: url("https://t3.ftcdn.net/jpg/05/80/41/38/360_F_580413805_b88GBVkJGJ4rVcUg8N15hNx59DRlhwm0.jpg");
+  background-size: cover; 
+  color: rgb(246, 255, 253);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+label {
+  color: rgb(196, 196, 125);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+
+h2 {
+  color: rgb(0, 247, 255);
+  margin: 2%;
+  font-family: 'Times New Roman', Times, serif
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+h3 {
+  color:rgb(0, 247, 255);
+  margin: 2%;
+  padding: 2% 0% 0% 0%;
+}
+
+#contenedor-general {
+  width: 80%;
+  height: 80vh;
+  margin: 5% auto auto auto;
+  background-color: rgba(10, 10, 10, 0.8);
+  border-radius: 25px;
+  border-color: rgba(1, 10, 12, 0.7);
+  border-style: solid;
+}
+
+input {
+  background-color: rgb(187, 183, 128);
+  width: 50%;
+  border-color: black;
+  border-radius: 8px;
+  margin: 0% 0% 0% 3%;
+}
+
+#boton-ingresos {
+  margin: 0% 0% 0% 5%;
+  background-color: rgb(255, 213, 97);
+  border-color: black;
+  border-radius: 6px;
+}
+
+.visor-intermedio {
+  background-color: rgba(168, 79, 74, 0.35);
+  border-radius: 10px;
+}
+
+.visor-inferior {
+  background-color: rgba(82, 120, 82, 0.35);
+  border-radius: 10px;
+}
+
+.boton-modal {
+  margin: 0% 0% 0% 1%;
+  background-color: rgb(0, 204, 255);
+  border-color: black;
+  border-radius: 6px;
+}
+
+.items-listas {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  margin-bottom: 5px;
 }
 
-.App-link {
-  color: #61dafb;
+.texto-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  width: 75%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.boton-asignar {
+  border-radius: 3px;
+  margin-right: 5px;
+  background-color: rgb(0, 204, 255);
+  border-color: black;
+
+}
+
+.boton-borrar {
+  border-radius: 3px;
+  margin-right: 5px;
+  background-color: rgb(241, 150, 75);
+  border-color: black;
+}
+
+.boton-reasignar {
+  border-radius: 3px;
+  background-color: rgb(95, 216, 84);
+  border-color: black;
+}
+
+.contenedor-tabla {
+  width: 100%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+table {
+  width: 100%;
+  margin: 0% 0% 0% 3%;
+}
+
+th, td {
+  color: rgb(201, 255, 255);
+}
+
+th:nth-child(1), td:nth-child(1) {
+  width: 5%;
+}
+
+th:nth-child(2), td:nth-child(2) {
+  width: 50%;
+}
+
+th:nth-child(3), td:nth-child(3) {
+  width: 17%;
+}
+
+th:nth-child(4), td:nth-child(4) {
+  width: 30%;
 }
